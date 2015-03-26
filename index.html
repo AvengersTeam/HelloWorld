@@ -75,20 +75,21 @@ LIMIT 10
       </div>
     <script>
       $( function() {
-        var prefix = 'PREFIX bcngeo: <http://datos.bcn.cl/ontologies/bcn-geographics#>' +
-        'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
-        'PREFIX dc: <http://purl.org/dc/elements/1.1/>' +
-        'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>' +
-        'PREFIX gn: <http://www.geonames.org/ontology/>' +
-        'PREFIX time: <http://www.w3.org/2006/time#> ' +
-        'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>' +
+        var prefix = 'PREFIX bcngeo: <http://datos.bcn.cl/ontologies/bcn-geographics#>' + "\n" +
+        'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' + "\n" +
+        'PREFIX dc: <http://purl.org/dc/elements/1.1/>' + "\n" +
+        'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>' + "\n" +
+        'PREFIX gn: <http://www.geonames.org/ontology/>' + "\n" +
+        'PREFIX time: <http://www.w3.org/2006/time#> ' + "\n" +
+        'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>' + "\n" +
         'PREFIX : <http://dbpedia.org/resource/>';
 
-        function doQuery( q, resContainerId, url) {
+        function doQuery( q, resContainerId, url, prefix ) {
+          prefix = prefix == undefined ? "" : prefix;
           $.ajax({
             dataType: 'jsonp',
             data: {
-              query: q,
+              query: prefix  + q,
               format: 'application/sparql-results+json'
             },
             url: url,
@@ -121,8 +122,9 @@ LIMIT 10
         var url = 'http://datos.bcn.cl/sparql';
         doQuery( q1, '#query1', url); 
         var url = 'http://dbpedia.org/sparql';
-        var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater "University_of_Chile" . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date ) }';
-        doQuery( q2, '#query2', url);
+        var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater :University_of_Chile . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date ) }';
+        prefix = 'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>' + 'PREFIX : <http://dbpedia.org/resource/>';
+        doQuery( q2, '#query2', url, prefix);
         console.log(doQuery( q2, '#query2', url));
       } );
     </script>
