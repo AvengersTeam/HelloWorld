@@ -63,12 +63,12 @@ SELECT DISTINCT ?id ?name ?place
 WHERE {
   ?place dc:identifier ?id .
   ?place gn:officialName ?name .
-  ?place a bcngeo:Place .
+  ?place a bcngeo:Commune .
 } 
-LIMIT 20
+LIMIT 10
         </pre>
-        <p>En este caso estamos consultado por los 10 primeros lugares. Fijense que se pregunta por un <code>?id ?name ?place</code>, pero inicialmente no se sabe que son. Luego, en el <code>WHERE</code> vamos
-        mencionando que es cada cosa. En especifico, con <code>?place a bcngeo:Place</code> estamos diciendo que <code>?place</code> es de una clase <strong>Place</strong> de la ontologia de info geografica de la BCN, con
+        <p>En este caso estamos consultado por las 10 primeras comunas. Fijense que se pregunta por un <code>?id ?name ?place</code>, pero inicialmente no se sabe que son. Luego, en el <code>WHERE</code> vamos
+        mencionando que es cada cosa. En especifico, con <code>?place a bcngeo:Place</code> estamos diciendo que <code>?place</code> es de una clase <strong>Commune</strong> de la ontologia de info geografica de la BCN, con
         <code>?place dc:identifier ?id</code> decimos que <code>?id</code> es una propiedad determinada por <code>dc:identifier</code> de <code>?place</code>. Analogo para el nombre. </p>
         <h4>Resultado:</h4>
         <div id="query1"></div>
@@ -88,7 +88,7 @@ LIMIT 20
           $.ajax({
             dataType: 'jsonp',
             data: {
-              query: prefix + q,
+              query: q,
               format: 'application/sparql-results+json'
             },
             url: url,
@@ -104,7 +104,7 @@ LIMIT 20
               $( data.results.bindings ).each( function( k, v ) {
                 table += '<tr>';
                 $( props ).each( function ( i, it ) { 
-                  table += '<td>' + v[it] + '</td>'; 
+                  table += '<td>' + v[it].value + '</td>'; 
                 } );
                 table += '</tr>';  
               });
@@ -117,8 +117,7 @@ LIMIT 20
           });
         }
 
-        q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Place } LIMIT 10';
-
+        q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Commune . } LIMIT 10';
         doQuery( q1, '#query1' ); 
       } );
     </script>
