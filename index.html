@@ -73,7 +73,6 @@ LIMIT 10
         <h4>Resultado:</h4>
         <div id="query1"></div>
       </div>
-    </div>
     <script>
       $( function() {
         var prefix = 'PREFIX bcngeo: <http://datos.bcn.cl/ontologies/bcn-geographics#>' +
@@ -82,7 +81,8 @@ LIMIT 10
         'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>' +
         'PREFIX gn: <http://www.geonames.org/ontology/>' +
         'PREFIX time: <http://www.w3.org/2006/time#> ' +
-        'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>';
+        'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>' +
+        'PREFIX : <http://dbpedia.org/resource/>';
 
         function doQuery( q, resContainerId, url) {
           $.ajax({
@@ -120,23 +120,25 @@ LIMIT 10
         q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Commune . } LIMIT 10';
         var url = 'http://datos.bcn.cl/sparql';
         doQuery( q1, '#query1', url); 
+        var url = 'http://dbpedia.org/sparql';
+        var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater "University_of_Chile" . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date ) }';
+        doQuery( q2, '#query2', url);
+        console.log(doQuery( q2, '#query2', url));
       } );
     </script>
-    <h3>Consulta #2:</h3>
-    <pre>
-SELECT ?X WHERE {
-   ?X dbpedia-owl:almaMater :University_of_Chile .
-   ?X dbpedia-owl:birthDate ?D
-   FILTER (?D > "1985-01-01"^^xsd:date )
-}
-        </pre>
-     <p>Acá estamos consultando sobre Wikipedia por todas las personas que hayan estudiado en la Universidad de Chile  y que hayan nacido después de 1985. Con <code>??X dbpedia-owl:almaMater :University_of_Chile </code> consultamos por todas las personas que estudiaron la Chile, y con <code>?X dbpedia-owl:birthDate ?D
-   FILTER (?D > "1985-01-01"^^xsd:date )</code> filtramos las personas que tengan birthDate mayor a 1985. Esta es una consulta compuesta, donde usamos la variable "intermedia" <code>?D</code> para filtrar las fechas.</p>
-    <script>
-      var url = 'http://dbpedia.org/sparql'
-      var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater :University_of_Chile . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date )';
-      doQuery( q1, '#query1', url);
-     </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <h3>Consulta #2:</h3>
+        <pre>
+    SELECT ?X WHERE {
+       ?X dbpedia-owl:almaMater :University_of_Chile .
+       ?X dbpedia-owl:birthDate ?D
+       FILTER (?D > "1985-01-01"^^xsd:date )
+    }
+            </pre>
+        <p>Acá estamos consultando sobre Wikipedia por todas las personas que hayan estudiado en la Universidad de Chile  y que hayan nacido después de 1985. Con <code>??X dbpedia-owl:almaMater :University_of_Chile </code> consultamos por todas las personas que estudiaron la Chile, y con <code>?X dbpedia-owl:birthDate ?D
+       FILTER (?D > "1985-01-01"^^xsd:date )</code> filtramos las personas que tengan birthDate mayor a 1985. Esta es una consulta compuesta, donde usamos la variable "intermedia" <code>?D</code> para filtrar las fechas.</p>
+        <h4>Resultado:</h4>
+        <div id="query2"></div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </body>
 </html>
