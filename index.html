@@ -81,7 +81,8 @@ LIMIT 10
         'PREFIX dc: <http://purl.org/dc/elements/1.1/>' +
         'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>' +
         'PREFIX gn: <http://www.geonames.org/ontology/>' +
-        'PREFIX time: <http://www.w3.org/2006/time#> ';
+        'PREFIX time: <http://www.w3.org/2006/time#> ' +
+        'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>';
 
         function doQuery( q, resContainerId, url) {
           $.ajax({
@@ -121,6 +122,21 @@ LIMIT 10
         doQuery( q1, '#query1', url); 
       } );
     </script>
+    <h3>Consulta #2:</h3>
+    <pre>
+SELECT ?X WHERE {
+   ?X dbpedia-owl:almaMater :University_of_Chile .
+   ?X dbpedia-owl:birthDate ?D
+   FILTER (?D > "1985-01-01"^^xsd:date )
+}
+        </pre>
+     <p>Acá estamos consultando sobre Wikipedia por todas las personas que hayan estudiado en la Universidad de Chile  y que hayan nacido después de 1985. Con <code>??X dbpedia-owl:almaMater :University_of_Chile </code> consultamos por todas las personas que estudiaron la Chile, y con <code>?X dbpedia-owl:birthDate ?D
+   FILTER (?D > "1985-01-01"^^xsd:date )</code> filtramos las personas que tengan birthDate mayor a 1985. Esta es una consulta compuesta, donde usamos la variable "intermedia" <code>?D</code> para filtrar las fechas.</p>
+    <script>
+      var url = 'http://dbpedia.org/sparql'
+      var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater :University_of_Chile . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date )';
+      doQuery( q1, '#query1', url);
+     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </body>
 </html>
