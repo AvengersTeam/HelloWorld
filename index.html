@@ -76,7 +76,6 @@ LIMIT 10
     </div>
     <script>
       $( function() {
-        var url = 'http://datos.bcn.cl/sparql';
         var prefix = 'PREFIX bcngeo: <http://datos.bcn.cl/ontologies/bcn-geographics#>' +
         'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
         'PREFIX dc: <http://purl.org/dc/elements/1.1/>' +
@@ -84,7 +83,7 @@ LIMIT 10
         'PREFIX gn: <http://www.geonames.org/ontology/>' +
         'PREFIX time: <http://www.w3.org/2006/time#> ';
 
-        function doQuery( q, resContainerId ) {
+        function doQuery( q, resContainerId, url) {
           $.ajax({
             dataType: 'jsonp',
             data: {
@@ -118,7 +117,8 @@ LIMIT 10
         }
 
         q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Commune . } LIMIT 10';
-        doQuery( q1, '#query1' ); 
+        var url = 'http://datos.bcn.cl/sparql';
+        doQuery( q1, '#query1', url); 
       } );
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
