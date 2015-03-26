@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hello World index page">
+    <meta name="author" content="Avengers Team">
+    <title>Proyecto de Juguete</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+      body {
+        padding-top: 40px;
+        padding-bottom: 60px;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active"><a href="#">Home</a></li>
+          <li role="presentation"><a href="#">About</a></li>
+          <li role="presentation"><a href="#">Contact</a></li>
+        </ul>
+        </nav>
+        <h3 class="text-muted">HelloWorld!</h3>
+      </div>
+      <div class="body">
+        <h1 class="page-header">Proyecto de Prueba</h1>
+        <h2>Ontología <small>(Datos Geograficos de la BCN)</small></h2>
+        <img src="http://datos.bcn.cl/ontologies/bcn-geographics/doc/images/ontologia.gif" class="img img-responsive img-center" alt="Ontologia de datos geograficos de la biblioteca del congreso nacional"/>
+        <br/>
+        <h2>Consultas Basicas</h2>
+        <p>Para todas las consultas, se trabajara con ciertos prefijos. Estos dependen de la ontología definida, por ejemplo, en la imagen anterior se puede observar
+        que algunas propiedades empiezan con <code>gn:</code> o con <code>time:</code>. Esto quiere decir que para construir el modelo actual, se reutilizaron elementos
+        ya creados por otros que estan dispuestos en la web. En este caso se utilizaran los siguientes:</p>
+        <pre>
+PREFIX bcngeo: &lt;http://datos.bcn.cl/ontologies/bcn-geographics#&rt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&rt;
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&rt;
+PREFIX geo: &lt;http://www.w3.org/2003/01/geo/wgs84_pos&rt;
+PREFIX gn: &lt;http://www.geonames.org/ontology&rt;
+PREFIX time: &lt;http://www.w3.org/2006/time&rt;
+        </pre>
+        <p>Ahora bien, la consulta se esta realizando al cliente sparql de la BCN (<a href="http://datos.bcn.cl/sparql" target="_blank">http://datos.bcn.cl/sparql</a>), mediante AJAX, por lo que se puede
+        obtener facilmente los resultados a partir de otro sitio.</p>
+        <h3>Consulta #1:</h3>
+        <pre>
+SELECT DISTINCT ?id ?name ?place 
+WHERE {
+  ?place dc:identifier ?id .
+  ?place gn:officialName ?name .
+  ?place a bcngeo:Place .
+} 
+LIMIT 20
+        </pre>
+        <p>En este caso estamos consultado por los 10 primeros lugares. Fijense que se pregunta por un <code>?id ?name ?place</code>, pero inicialmente no se sabe que son. Luego, en el <code>WHERE</code> vamos
+        mencionando que es cada cosa. En especifico, con <code>?place a bcngeo:Place</code> estamos diciendo que <code>?place</code> es de una clase <strong>Place</strong> de la ontologia de info geografica de la BCN, con
+        <code>?place dc:identifier ?id</code> decimos que <code>?id</code> es una propiedad determinada por <code>dc:identifier</code> de <code>?place</code>. Analogo para el nombre. </p>
+        <h4>Resultado:</h4>
+        <div id="query1"></div>
+      </div>
+    </div>
+    <script>
+      $( function() {
+        var url = 'http://datos.bcn.cl/sparql';
+        var prefix = 'PREFIX bcngeo: <http://datos.bcn.cl/ontologies/bcn-geographics#>' +
+        'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
+        'PREFIX dc: <http://purl.org/dc/elements/1.1/>' +
+        'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>' +
+        'PREFIX gn: <http://www.geonames.org/ontology/>' +
+        'PREFIX time: <http://www.w3.org/2006/time#> ';
+
+        function doQuery( q, resContainerId ) {
+          $.ajax({
+            dataType: 'jsonp',
+            data: {
+              query: prefix + q,
+              format: 'application/sparql-results+json'
+            },
+            url: url,
+            success: function( data ) {
+              console.log( data );
+              var table = '<table class="table table-condensed table-bordered"><thead><tr>';
+              var props = [];
+              $( data.head.vars ).each( function( k, v ) {
+                props.push( v );
+                table += '<th>' + v + '</th>';
+              });
+              table += '</tr></thead><tbody>';
+              $( data.results.bindings ).each( function( k, v ) {
+                table += '<tr>';
+                $( props ).each( function ( i, it ) { 
+                  table += '<td>' + v[it] + '</td>'; 
+                } );
+                table += '</tr>';  
+              });
+              if( data.results.bindings.length == 0 ) table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';
+              $( resContainerId ).empty().append( table );
+            },
+            complete: function() {
+              console.log( 'Query Complete!' );
+            }
+          });
+        }
+
+        q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Place } LIMIT 10';
+
+        doQuery( q1, '#query1' ); 
+      } );
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </body>
+</html>
