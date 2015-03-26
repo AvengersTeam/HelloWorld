@@ -20,6 +20,9 @@
         padding-top: 40px;
         padding-bottom: 60px;
       }
+      .img {
+        border: 1px solid lightgrey;
+      }
       .img-center {
         margin-left: auto;
         margin-right: auto;
@@ -31,17 +34,18 @@
       <div class="header clearfix">
         <nav>
         <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
-          <li role="presentation"><a href="#">About</a></li>
-          <li role="presentation"><a href="#">Contact</a></li>
+          <li role="presentation" class="active"><a href="index.html">Basics</a></li>
+          <li role="presentation"><a href="rdf.html">RDF Database</a></li>
+          <li role="presentation"><a href="contact.html">Contact</a></li>
         </ul>
         </nav>
         <h3 class="text-muted">HelloWorld!</h3>
       </div>
       <div class="body">
         <h1 class="page-header">Proyecto de Prueba</h1>
-        <h2>Ontología <small>(Datos Geograficos de la BCN)</small></h2>
-        <img src="http://datos.bcn.cl/ontologies/bcn-geographics/doc/images/ontologia.gif" class="img img-responsive img-center" alt="Ontologia de datos geograficos de la biblioteca del congreso nacional"/>
+        <h2>Algunas Ontologías Usadas</h2>
+        <img src="http://datos.bcn.cl/ontologies/bcn-geographics/doc/images/ontologia.gif" class="img img-responsive img-center" alt="Ontologia de datos geograficos de la biblioteca del congreso nacional"/><br/>
+        <img src="http://datos.bcn.cl/ontologies/bcn-biographies/doc/images/ontologia.gif" class="img img-responsive img-center" alt="Ontologia de datos biograficos de la biblioteca del congreso nacional">
         <br/>
         <h2>Consultas Basicas</h2>
         <p>Para todas las consultas, se trabajara con ciertos prefijos. Estos dependen de la ontología definida, por ejemplo, en la imagen anterior se puede observar
@@ -88,7 +92,24 @@ SELECT ?X WHERE {
         <div id="query2"></div>
         <br/>
 
-
+        <h3>Consulta #3:</h3>
+        <pre>
+SELECT $persona $name WHERE { 
+  $persona foaf:name $name . 
+  $persona a foaf:Person . 
+  $persona bcnbio:hasParliamentaryAppointment $parlapoint . 
+  $parlapoint bcnbio:hasPosition $position . 
+  $position rdf:type bcnbio:Diputado . 
+  $parlapoint bcnbio:hasBeginning $ini .
+  $ini time:year $yini .
+  $parlapoint bcnbio:hasEnd $fin .
+  $fin time:year $yfin
+  FILTER ( $yini < "2015"^^xsd:integer )
+  FILTER ( $yfin > "2015"^^xsd:integer )
+} LIMIT 10
+        </pre>
+        <p></p>
+        <div id="query3"></div>
       </div>
     </div>
     <script>
@@ -142,9 +163,11 @@ SELECT ?X WHERE {
         var dbpedia_url = 'http://dbpedia.org/sparql';
         var q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Commune . } LIMIT 10';
         var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater dbpedia-res:University_of_Chile . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date ) }';
- 
+        var q3 = 'SELECT ?persona ?name WHERE { ?persona foaf:name ?name . ?persona a foaf:Person . ?persona bcnbio:hasParliamentaryAppointment ?parlapoint . ?parlapoint bcnbio:hasPosition ?position . ?position rdf:type bcnbio:Diputado . ?parlapoint bcnbio:hasBeginning ?ini . ?ini time:year ?yini . ?parlapoint bcnbio:hasEnd ?fin . ?fin time:year ?yfin FILTER ( ?yini < "2015"^^xsd:integer ) FILTER ( ?yfin > "2015"^^xsd:integer )} LIMIT 10';
+
         doQuery( q1, '#query1', bcn_url ); 
         doQuery( q2, '#query2', dbpedia_url, prefixs.dbpediaowl + prefixs.dbpediares );
+        doQuery( q3, '#query3', bcn_url );
       } );
     </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
