@@ -20,6 +20,9 @@
         padding-top: 40px;
         padding-bottom: 60px;
       }
+      .img {
+        border: 1px solid lightgrey;
+      }
       .img-center {
         margin-left: auto;
         margin-right: auto;
@@ -31,17 +34,18 @@
       <div class="header clearfix">
         <nav>
         <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
-          <li role="presentation"><a href="#">About</a></li>
-          <li role="presentation"><a href="#">Contact</a></li>
+          <li role="presentation" class="active"><a href="index.html">Basics</a></li>
+          <li role="presentation"><a href="rdf.html">RDF Database</a></li>
+          <li role="presentation"><a href="contact.html">Contact</a></li>
         </ul>
         </nav>
         <h3 class="text-muted">HelloWorld!</h3>
       </div>
       <div class="body">
         <h1 class="page-header">Proyecto de Prueba</h1>
-        <h2>Ontología <small>(Datos Geograficos de la BCN)</small></h2>
-        <img src="http://datos.bcn.cl/ontologies/bcn-geographics/doc/images/ontologia.gif" class="img img-responsive img-center" alt="Ontologia de datos geograficos de la biblioteca del congreso nacional"/>
+        <h2>Algunas Ontologías Usadas</h2>
+        <img src="http://datos.bcn.cl/ontologies/bcn-geographics/doc/images/ontologia.gif" class="img img-responsive img-center" alt="Ontologia de datos geograficos de la biblioteca del congreso nacional"/><br/>
+        <img src="http://datos.bcn.cl/ontologies/bcn-biographies/doc/images/ontologia.gif" class="img img-responsive img-center" alt="Ontologia de datos biograficos de la biblioteca del congreso nacional">
         <br/>
         <h2>Consultas Basicas</h2>
         <p>Para todas las consultas, se trabajara con ciertos prefijos. Estos dependen de la ontología definida, por ejemplo, en la imagen anterior se puede observar
@@ -87,8 +91,34 @@ SELECT ?X WHERE {
         <h4>Resultado:</h4>
         <div id="query2"></div>
         <br/>
-        (sí, la camilita es el único resultado)
 
+        <h3>Consulta #3:</h3>
+        <pre>
+SELECT $persona $name WHERE { 
+  $persona foaf:name $name . 
+  $persona a foaf:Person . 
+  $persona bcnbio:hasParliamentaryAppointment $parlapoint . 
+  $parlapoint bcnbio:hasPosition $position . 
+  $position rdf:type bcnbio:Diputado . 
+  $parlapoint bcnbio:hasBeginning $ini .
+  $ini time:year $yini .
+  $parlapoint bcnbio:hasEnd $fin .
+  $fin time:year $yfin
+  FILTER ( $yini < "2015"^^xsd:integer )
+  FILTER ( $yfin > "2015"^^xsd:integer )
+} LIMIT 10
+        </pre>
+        <h4>Resultado:</h4>
+        <div id="query3"></div>
+        <br/>
+
+        <h3>Consulta #4: Repositorio en sesame</h3>
+        <pre>
+SELECT * WHERE { ?s ?p ?o }
+        </pre>
+        <h4>Resultado:</h4>
+        <div id="query4"></div>
+        <p> Usa un repo de testeo (ID:123) en sesame <a href="http://localhost:8080/openrdf-sesame/repositories/123"> http://localhost:8080/openrdf-sesame/repositories/123 </a> (endpoint). Más detalles del repo: <a href="http://localhost:8080/openrdf-workbench/repositories/123/summary"> http://localhost:8080/openrdf-workbench/repositories/123/summary </a>. Requiere tomcat corriendo. TODO: verificar que se use correctamente esta llamada</p>
       </div>
     </div>
     <script>
@@ -113,7 +143,6 @@ SELECT ?X WHERE {
           },
           url: url,
           success: function( data ) {
-            console.log( data );
             var table = '<table class="table table-condensed table-bordered"><thead><tr>';
             var props = [];
             $( data.head.vars ).each( function( k, v ) {
@@ -128,7 +157,43 @@ SELECT ?X WHERE {
               } );
               table += '</tr>';  
             });
-            if( data.results.bindings.length == 0 ) table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';
+            if( data.results.bindings.length == 0 ) { console.log('missing?'); table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';}
+            $( resContainerId ).empty().append( table );
+          },
+          complete: function() {
+            console.log( 'Query Complete!' );
+          }
+        });
+      }
+
+      function doLocalQuery( q, resContainerId, url, prefix ) {
+        prefix = prefix == undefined ? "" : prefix;
+        $.ajax({
+          dataType: 'jsonp',
+          data: {
+            //queryLn: 'SPARQL',
+            query: prefix  + q,
+            //format: 'application/sparql-results+json',
+            //infer: 'true',
+            Accept: 'application/sparql-results+json' // Si pongo format en vez de Accept se enoja
+          },
+          url: url,
+          success: function( data ) {
+            var table = '<table class="table table-condensed table-bordered"><thead><tr>';
+            var props = [];
+            $( data.head.vars ).each( function( k, v ) {
+              props.push( v );
+              table += '<th>' + v + '</th>';
+            });
+            table += '</tr></thead><tbody>';
+            $( data.results.bindings ).each( function( k, v ) {
+              table += '<tr>';
+              $( props ).each( function ( i, it ) { 
+                table += '<td>' + v[it].value + '</td>'; 
+              } );
+              table += '</tr>';  
+            });
+            if( data.results.bindings.length == 0 ) { console.log('missing?'); table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';}
             $( resContainerId ).empty().append( table );
           },
           complete: function() {
@@ -140,11 +205,16 @@ SELECT ?X WHERE {
       $( function() {
         var bcn_url = 'http://datos.bcn.cl/sparql';
         var dbpedia_url = 'http://dbpedia.org/sparql';
+        var local_url = 'http://localhost:8080/openrdf-sesame/repositories/123'
         var q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Commune . } LIMIT 10';
         var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater dbpedia-res:University_of_Chile . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date ) }';
- 
+        var q3 = 'SELECT ?persona ?name WHERE { ?persona foaf:name ?name . ?persona a foaf:Person . ?persona bcnbio:hasParliamentaryAppointment ?parlapoint . ?parlapoint bcnbio:hasPosition ?position . ?position rdf:type bcnbio:Diputado . ?parlapoint bcnbio:hasBeginning ?ini . ?ini time:year ?yini . ?parlapoint bcnbio:hasEnd ?fin . ?fin time:year ?yfin FILTER ( ?yini < "2015"^^xsd:integer ) FILTER ( ?yfin > "2015"^^xsd:integer )} LIMIT 10';
+        var q4 = 'SELECT * WHERE { ?s ?p ?o }';
+
         doQuery( q1, '#query1', bcn_url ); 
         doQuery( q2, '#query2', dbpedia_url, prefixs.dbpediaowl + prefixs.dbpediares );
+        doQuery( q3, '#query3', bcn_url );
+        doLocalQuery( q4, '#query4', local_url );
       } );
     </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
