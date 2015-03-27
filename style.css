@@ -1,0 +1,12 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+.img {
+  border: 1px solid lightgrey;
+}
+.img-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
