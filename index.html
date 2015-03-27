@@ -59,7 +59,7 @@ WHERE {
 LIMIT 10
         </pre>
         <p>En este caso estamos consultado por las 10 primeras comunas. Fijense que se pregunta por un <code>?id ?name ?place</code>, pero inicialmente no se sabe que son. Luego, en el <code>WHERE</code> vamos
-        mencionando que es cada cosa. En especifico, con <code>?place a bcngeo:Place</code> estamos diciendo que <code>?place</code> es de una clase <strong>Commune</strong> de la ontologia de info geografica de la BCN, con
+        mencionando que es cada cosa. En especifico, con <code>?place a bcngeo:Commune</code> estamos diciendo que <code>?place</code> es de una clase <strong>Commune</strong> de la ontologia de info geografica de la BCN, con
         <code>?place dc:identifier ?id</code> decimos que <code>?id</code> es una propiedad determinada por <code>dc:identifier</code> de <code>?place</code>. Analogo para el nombre. </p>
         <h4>Resultado:</h4>
         <div id="query1"></div>
