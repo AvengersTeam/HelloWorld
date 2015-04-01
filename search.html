@@ -32,7 +32,7 @@
       <div class="body">
         <h1 class="page-header">Buscador de Datos</h1>
 
-        <p>Usa <a href="http://localhost:8080/openrdf-sesame/repositories/test"> http://localhost:8080/openrdf-sesame/repositories/test </a></p>
+        <p>Busca en <a href="http://dbpedia.org/sparql"> DBPedia </a>!</p>
 
         <form class="form-inline" action="javascript:doSubjectQuery()">
           <div class="form-group">
@@ -68,39 +68,42 @@
 
       function doSubjectQuery() { 
         var value = $("#subject").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) }';
+        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) } LIMIT 100';
         doQuery(q,'#subject-table');
       }
 
       function doPredicateQuery() { 
         var value = $("#predicate").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Predicate), "'+ value +'", "i" ) }';
+        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Predicate), "'+ value +'", "i" ) } LIMIT 100';
         doQuery(q,'#predicate-table');
       }
 
       function doObjectQuery() { 
         var value = $("#object").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(?Object, "'+ value +'", "i" ) }';
+        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(?Object, "'+ value +'", "i" ) } LIMIT 100';
         doQuery(q,'#object-table');
       }
 
       function doQuery(q,resContainerId) {
         var prefixs = {
           cd: 'PREFIX cd: <http://www.recshop.fake/cd#>',
-          rdf: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>'
+          rdf: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>',
+          dbpediaowl: 'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>',
+          dbpediares: 'PREFIX dbpedia-res: <http://dbpedia.org/resource/>',
         };
 
-        var prefix = prefixs.cd + prefixs.rdf
-        var url = 'http://localhost:8080/openrdf-sesame/repositories/test'
+        var prefix = prefixs.cd + prefixs.rdf;
+        //var url = 'http://localhost:8080/openrdf-sesame/repositories/test';
+        var url = 'http://dbpedia.org/sparql';
 
         $.ajax({
           dataType: 'jsonp',
           data: {
             //queryLn: 'SPARQL',
             query: prefix  + q,
-            //format: 'application/sparql-results+json',
+            format: 'application/sparql-results+json',
             //infer: 'true',
-            Accept: 'application/sparql-results+json' // Si pongo format en vez de Accept se enoja
+            //Accept: 'application/sparql-results+json' // Si pongo format en vez de Accept se enoja
           },
           url: url,
           success: function( data ) {
@@ -114,7 +117,7 @@
             $( data.results.bindings ).each( function( k, v ) {
               table += '<tr>';
               $( props ).each( function ( i, it ) { 
-                table += '<td>' + v[it].value + '</td>'; 
+                table += '<td><a href="' + v[it].value + '">' + v[it].value + '</a></td>'; 
               } );
               table += '</tr>';  
             });
