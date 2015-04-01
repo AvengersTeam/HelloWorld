@@ -1,22 +1,2713 @@
-The MIT License (MIT)
+@prefix map: <#> .
+@prefix db: <> .
+@prefix vocab: <vocab/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
 
-Copyright (c) 2015 AvengersTeam
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "org.postgresql.Driver";
+	d2rq:jdbcDSN "jdbc:postgresql://localhost/prueba2";
+	d2rq:username "postgres";
+	d2rq:password "avengers";
+	.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+# Table bi_2_dis
+map:bi_2_dis a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bi_2_dis/@@bi_2_dis.id@@";
+	d2rq:class vocab:bi_2_dis;
+	d2rq:classDefinitionLabel "bi_2_dis";
+	.
+map:bi_2_dis__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dis;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bi_2_dis #@@bi_2_dis.id@@";
+	.
+map:bi_2_dis_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dis;
+	d2rq:property vocab:bi_2_dis_id;
+	d2rq:propertyDefinitionLabel "bi_2_dis id";
+	d2rq:column "bi_2_dis.id";
+	d2rq:datatype xsd:integer;
+	.
+map:bi_2_dis_authority a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dis;
+	d2rq:property vocab:bi_2_dis_authority;
+	d2rq:propertyDefinitionLabel "bi_2_dis authority";
+	d2rq:column "bi_2_dis.authority";
+	.
+map:bi_2_dis_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dis;
+	d2rq:property vocab:bi_2_dis_value;
+	d2rq:propertyDefinitionLabel "bi_2_dis value";
+	d2rq:column "bi_2_dis.value";
+	.
+map:bi_2_dis_sort_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dis;
+	d2rq:property vocab:bi_2_dis_sort_value;
+	d2rq:propertyDefinitionLabel "bi_2_dis sort_value";
+	d2rq:column "bi_2_dis.sort_value";
+	.
+map:bi_2_dis_indiv_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dis;
+	d2rq:property vocab:bi_2_dis_indiv_id;
+	d2rq:propertyDefinitionLabel "bi_2_dis indiv_id";
+	d2rq:column "bi_2_dis.indiv_id";
+	.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+# Table bi_2_dmap
+map:bi_2_dmap a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bi_2_dmap/@@bi_2_dmap.map_id@@";
+	d2rq:class vocab:bi_2_dmap;
+	d2rq:classDefinitionLabel "bi_2_dmap";
+	.
+map:bi_2_dmap__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dmap;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bi_2_dmap #@@bi_2_dmap.map_id@@";
+	.
+map:bi_2_dmap_map_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dmap;
+	d2rq:property vocab:bi_2_dmap_map_id;
+	d2rq:propertyDefinitionLabel "bi_2_dmap map_id";
+	d2rq:column "bi_2_dmap.map_id";
+	d2rq:datatype xsd:integer;
+	.
+map:bi_2_dmap_distinct_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dmap;
+	d2rq:property vocab:bi_2_dmap_distinct_id;
+	d2rq:refersToClassMap map:bi_2_dis;
+	d2rq:join "bi_2_dmap.distinct_id => bi_2_dis.id";
+	.
+map:bi_2_dmap_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_2_dmap;
+	d2rq:property vocab:bi_2_dmap_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "bi_2_dmap.item_id => item.item_id";
+	.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+# Table bi_4_dis
+map:bi_4_dis a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bi_4_dis/@@bi_4_dis.id@@";
+	d2rq:class vocab:bi_4_dis;
+	d2rq:classDefinitionLabel "bi_4_dis";
+	.
+map:bi_4_dis__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dis;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bi_4_dis #@@bi_4_dis.id@@";
+	.
+map:bi_4_dis_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dis;
+	d2rq:property vocab:bi_4_dis_id;
+	d2rq:propertyDefinitionLabel "bi_4_dis id";
+	d2rq:column "bi_4_dis.id";
+	d2rq:datatype xsd:integer;
+	.
+map:bi_4_dis_authority a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dis;
+	d2rq:property vocab:bi_4_dis_authority;
+	d2rq:propertyDefinitionLabel "bi_4_dis authority";
+	d2rq:column "bi_4_dis.authority";
+	.
+map:bi_4_dis_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dis;
+	d2rq:property vocab:bi_4_dis_value;
+	d2rq:propertyDefinitionLabel "bi_4_dis value";
+	d2rq:column "bi_4_dis.value";
+	.
+map:bi_4_dis_sort_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dis;
+	d2rq:property vocab:bi_4_dis_sort_value;
+	d2rq:propertyDefinitionLabel "bi_4_dis sort_value";
+	d2rq:column "bi_4_dis.sort_value";
+	.
+
+# Table bi_4_dmap
+map:bi_4_dmap a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bi_4_dmap/@@bi_4_dmap.map_id@@";
+	d2rq:class vocab:bi_4_dmap;
+	d2rq:classDefinitionLabel "bi_4_dmap";
+	.
+map:bi_4_dmap__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dmap;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bi_4_dmap #@@bi_4_dmap.map_id@@";
+	.
+map:bi_4_dmap_map_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dmap;
+	d2rq:property vocab:bi_4_dmap_map_id;
+	d2rq:propertyDefinitionLabel "bi_4_dmap map_id";
+	d2rq:column "bi_4_dmap.map_id";
+	d2rq:datatype xsd:integer;
+	.
+map:bi_4_dmap_distinct_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dmap;
+	d2rq:property vocab:bi_4_dmap_distinct_id;
+	d2rq:refersToClassMap map:bi_4_dis;
+	d2rq:join "bi_4_dmap.distinct_id => bi_4_dis.id";
+	.
+map:bi_4_dmap_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_4_dmap;
+	d2rq:property vocab:bi_4_dmap_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "bi_4_dmap.item_id => item.item_id";
+	.
+
+# Table bi_item
+map:bi_item a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bi_item/@@bi_item.id@@";
+	d2rq:class vocab:bi_item;
+	d2rq:classDefinitionLabel "bi_item";
+	.
+map:bi_item__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_item;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bi_item #@@bi_item.id@@";
+	.
+map:bi_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_item;
+	d2rq:property vocab:bi_item_id;
+	d2rq:propertyDefinitionLabel "bi_item id";
+	d2rq:column "bi_item.id";
+	d2rq:datatype xsd:integer;
+	.
+map:bi_item_sort_3 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_item;
+	d2rq:property vocab:bi_item_sort_3;
+	d2rq:propertyDefinitionLabel "bi_item sort_3";
+	d2rq:column "bi_item.sort_3";
+	.
+map:bi_item_sort_1 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_item;
+	d2rq:property vocab:bi_item_sort_1;
+	d2rq:propertyDefinitionLabel "bi_item sort_1";
+	d2rq:column "bi_item.sort_1";
+	.
+map:bi_item_sort_2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_item;
+	d2rq:property vocab:bi_item_sort_2;
+	d2rq:propertyDefinitionLabel "bi_item sort_2";
+	d2rq:column "bi_item.sort_2";
+	.
+map:bi_item_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_item;
+	d2rq:property vocab:bi_item_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "bi_item.item_id => item.item_id";
+	.
+
+# Table bi_private
+map:bi_private a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bi_private/@@bi_private.id@@";
+	d2rq:class vocab:bi_private;
+	d2rq:classDefinitionLabel "bi_private";
+	.
+map:bi_private__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_private;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bi_private #@@bi_private.id@@";
+	.
+map:bi_private_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_private;
+	d2rq:property vocab:bi_private_id;
+	d2rq:propertyDefinitionLabel "bi_private id";
+	d2rq:column "bi_private.id";
+	d2rq:datatype xsd:integer;
+	.
+map:bi_private_sort_1 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_private;
+	d2rq:property vocab:bi_private_sort_1;
+	d2rq:propertyDefinitionLabel "bi_private sort_1";
+	d2rq:column "bi_private.sort_1";
+	.
+map:bi_private_sort_2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_private;
+	d2rq:property vocab:bi_private_sort_2;
+	d2rq:propertyDefinitionLabel "bi_private sort_2";
+	d2rq:column "bi_private.sort_2";
+	.
+map:bi_private_sort_3 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_private;
+	d2rq:property vocab:bi_private_sort_3;
+	d2rq:propertyDefinitionLabel "bi_private sort_3";
+	d2rq:column "bi_private.sort_3";
+	.
+map:bi_private_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_private;
+	d2rq:property vocab:bi_private_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "bi_private.item_id => item.item_id";
+	.
+
+# Table bi_withdrawn
+map:bi_withdrawn a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bi_withdrawn/@@bi_withdrawn.id@@";
+	d2rq:class vocab:bi_withdrawn;
+	d2rq:classDefinitionLabel "bi_withdrawn";
+	.
+map:bi_withdrawn__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_withdrawn;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bi_withdrawn #@@bi_withdrawn.id@@";
+	.
+map:bi_withdrawn_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_withdrawn;
+	d2rq:property vocab:bi_withdrawn_id;
+	d2rq:propertyDefinitionLabel "bi_withdrawn id";
+	d2rq:column "bi_withdrawn.id";
+	d2rq:datatype xsd:integer;
+	.
+map:bi_withdrawn_sort_3 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_withdrawn;
+	d2rq:property vocab:bi_withdrawn_sort_3;
+	d2rq:propertyDefinitionLabel "bi_withdrawn sort_3";
+	d2rq:column "bi_withdrawn.sort_3";
+	.
+map:bi_withdrawn_sort_1 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_withdrawn;
+	d2rq:property vocab:bi_withdrawn_sort_1;
+	d2rq:propertyDefinitionLabel "bi_withdrawn sort_1";
+	d2rq:column "bi_withdrawn.sort_1";
+	.
+map:bi_withdrawn_sort_2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_withdrawn;
+	d2rq:property vocab:bi_withdrawn_sort_2;
+	d2rq:propertyDefinitionLabel "bi_withdrawn sort_2";
+	d2rq:column "bi_withdrawn.sort_2";
+	.
+map:bi_withdrawn_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bi_withdrawn;
+	d2rq:property vocab:bi_withdrawn_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "bi_withdrawn.item_id => item.item_id";
+	.
+
+# Table bitstream
+map:bitstream a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bitstream/@@bitstream.bitstream_id@@";
+	d2rq:class vocab:bitstream;
+	d2rq:classDefinitionLabel "bitstream";
+	.
+map:bitstream__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bitstream #@@bitstream.bitstream_id@@";
+	.
+map:bitstream_bitstream_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_bitstream_id;
+	d2rq:propertyDefinitionLabel "bitstream bitstream_id";
+	d2rq:column "bitstream.bitstream_id";
+	d2rq:datatype xsd:integer;
+	.
+map:bitstream_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_name;
+	d2rq:propertyDefinitionLabel "bitstream name";
+	d2rq:column "bitstream.name";
+	.
+map:bitstream_size_bytes a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_size_bytes;
+	d2rq:propertyDefinitionLabel "bitstream size_bytes";
+	d2rq:column "bitstream.size_bytes";
+	d2rq:datatype xsd:integer;
+	.
+map:bitstream_checksum a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_checksum;
+	d2rq:propertyDefinitionLabel "bitstream checksum";
+	d2rq:column "bitstream.checksum";
+	.
+map:bitstream_checksum_algorithm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_checksum_algorithm;
+	d2rq:propertyDefinitionLabel "bitstream checksum_algorithm";
+	d2rq:column "bitstream.checksum_algorithm";
+	.
+map:bitstream_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_description;
+	d2rq:propertyDefinitionLabel "bitstream description";
+	d2rq:column "bitstream.description";
+	.
+map:bitstream_user_format_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_user_format_description;
+	d2rq:propertyDefinitionLabel "bitstream user_format_description";
+	d2rq:column "bitstream.user_format_description";
+	.
+map:bitstream_source a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_source;
+	d2rq:propertyDefinitionLabel "bitstream source";
+	d2rq:column "bitstream.source";
+	.
+map:bitstream_internal_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_internal_id;
+	d2rq:propertyDefinitionLabel "bitstream internal_id";
+	d2rq:column "bitstream.internal_id";
+	.
+map:bitstream_deleted a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_deleted;
+	d2rq:propertyDefinitionLabel "bitstream deleted";
+	d2rq:column "bitstream.deleted";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:bitstream_store_number a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_store_number;
+	d2rq:propertyDefinitionLabel "bitstream store_number";
+	d2rq:column "bitstream.store_number";
+	d2rq:datatype xsd:integer;
+	.
+map:bitstream_sequence_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_sequence_id;
+	d2rq:propertyDefinitionLabel "bitstream sequence_id";
+	d2rq:column "bitstream.sequence_id";
+	d2rq:datatype xsd:integer;
+	.
+map:bitstream_bitstream_format_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstream;
+	d2rq:property vocab:bitstream_bitstream_format_id;
+	d2rq:refersToClassMap map:bitstreamformatregistry;
+	d2rq:join "bitstream.bitstream_format_id => bitstreamformatregistry.bitstream_format_id";
+	.
+
+# Table bitstreamformatregistry
+map:bitstreamformatregistry a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bitstreamformatregistry/@@bitstreamformatregistry.bitstream_format_id@@";
+	d2rq:class vocab:bitstreamformatregistry;
+	d2rq:classDefinitionLabel "bitstreamformatregistry";
+	.
+map:bitstreamformatregistry__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstreamformatregistry;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bitstreamformatregistry #@@bitstreamformatregistry.bitstream_format_id@@";
+	.
+map:bitstreamformatregistry_bitstream_format_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstreamformatregistry;
+	d2rq:property vocab:bitstreamformatregistry_bitstream_format_id;
+	d2rq:propertyDefinitionLabel "bitstreamformatregistry bitstream_format_id";
+	d2rq:column "bitstreamformatregistry.bitstream_format_id";
+	d2rq:datatype xsd:integer;
+	.
+map:bitstreamformatregistry_mimetype a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstreamformatregistry;
+	d2rq:property vocab:bitstreamformatregistry_mimetype;
+	d2rq:propertyDefinitionLabel "bitstreamformatregistry mimetype";
+	d2rq:column "bitstreamformatregistry.mimetype";
+	.
+map:bitstreamformatregistry_short_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstreamformatregistry;
+	d2rq:property vocab:bitstreamformatregistry_short_description;
+	d2rq:propertyDefinitionLabel "bitstreamformatregistry short_description";
+	d2rq:column "bitstreamformatregistry.short_description";
+	.
+map:bitstreamformatregistry_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstreamformatregistry;
+	d2rq:property vocab:bitstreamformatregistry_description;
+	d2rq:propertyDefinitionLabel "bitstreamformatregistry description";
+	d2rq:column "bitstreamformatregistry.description";
+	.
+map:bitstreamformatregistry_support_level a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstreamformatregistry;
+	d2rq:property vocab:bitstreamformatregistry_support_level;
+	d2rq:propertyDefinitionLabel "bitstreamformatregistry support_level";
+	d2rq:column "bitstreamformatregistry.support_level";
+	d2rq:datatype xsd:integer;
+	.
+map:bitstreamformatregistry_internal a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bitstreamformatregistry;
+	d2rq:property vocab:bitstreamformatregistry_internal;
+	d2rq:propertyDefinitionLabel "bitstreamformatregistry internal";
+	d2rq:column "bitstreamformatregistry.internal";
+	d2rq:valueRegex "^[01]*$";
+	.
+
+# Table bundle
+map:bundle a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bundle/@@bundle.bundle_id@@";
+	d2rq:class vocab:bundle;
+	d2rq:classDefinitionLabel "bundle";
+	.
+map:bundle__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bundle #@@bundle.bundle_id@@";
+	.
+map:bundle_bundle_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle;
+	d2rq:property vocab:bundle_bundle_id;
+	d2rq:propertyDefinitionLabel "bundle bundle_id";
+	d2rq:column "bundle.bundle_id";
+	d2rq:datatype xsd:integer;
+	.
+map:bundle_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle;
+	d2rq:property vocab:bundle_name;
+	d2rq:propertyDefinitionLabel "bundle name";
+	d2rq:column "bundle.name";
+	.
+map:bundle_primary_bitstream_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle;
+	d2rq:property vocab:bundle_primary_bitstream_id;
+	d2rq:refersToClassMap map:bitstream;
+	d2rq:join "bundle.primary_bitstream_id => bitstream.bitstream_id";
+	.
+
+# Table bundle2bitstream
+map:bundle2bitstream a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "bundle2bitstream/@@bundle2bitstream.id@@";
+	d2rq:class vocab:bundle2bitstream;
+	d2rq:classDefinitionLabel "bundle2bitstream";
+	.
+map:bundle2bitstream__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle2bitstream;
+	d2rq:property rdfs:label;
+	d2rq:pattern "bundle2bitstream #@@bundle2bitstream.id@@";
+	.
+map:bundle2bitstream_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle2bitstream;
+	d2rq:property vocab:bundle2bitstream_id;
+	d2rq:propertyDefinitionLabel "bundle2bitstream id";
+	d2rq:column "bundle2bitstream.id";
+	d2rq:datatype xsd:integer;
+	.
+map:bundle2bitstream_bitstream_order a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle2bitstream;
+	d2rq:property vocab:bundle2bitstream_bitstream_order;
+	d2rq:propertyDefinitionLabel "bundle2bitstream bitstream_order";
+	d2rq:column "bundle2bitstream.bitstream_order";
+	d2rq:datatype xsd:integer;
+	.
+map:bundle2bitstream_bundle_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle2bitstream;
+	d2rq:property vocab:bundle2bitstream_bundle_id;
+	d2rq:refersToClassMap map:bundle;
+	d2rq:join "bundle2bitstream.bundle_id => bundle.bundle_id";
+	.
+map:bundle2bitstream_bitstream_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:bundle2bitstream;
+	d2rq:property vocab:bundle2bitstream_bitstream_id;
+	d2rq:refersToClassMap map:bitstream;
+	d2rq:join "bundle2bitstream.bitstream_id => bitstream.bitstream_id";
+	.
+
+# Table checksum_history
+map:checksum_history a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "checksum_history/@@checksum_history.check_id@@";
+	d2rq:class vocab:checksum_history;
+	d2rq:classDefinitionLabel "checksum_history";
+	.
+map:checksum_history__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property rdfs:label;
+	d2rq:pattern "checksum_history #@@checksum_history.check_id@@";
+	.
+map:checksum_history_check_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property vocab:checksum_history_check_id;
+	d2rq:propertyDefinitionLabel "checksum_history check_id";
+	d2rq:column "checksum_history.check_id";
+	d2rq:datatype xsd:integer;
+	.
+map:checksum_history_bitstream_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property vocab:checksum_history_bitstream_id;
+	d2rq:propertyDefinitionLabel "checksum_history bitstream_id";
+	d2rq:column "checksum_history.bitstream_id";
+	d2rq:datatype xsd:integer;
+	.
+map:checksum_history_process_start_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property vocab:checksum_history_process_start_date;
+	d2rq:propertyDefinitionLabel "checksum_history process_start_date";
+	d2rq:column "checksum_history.process_start_date";
+	d2rq:datatype xsd:dateTime;
+	.
+map:checksum_history_process_end_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property vocab:checksum_history_process_end_date;
+	d2rq:propertyDefinitionLabel "checksum_history process_end_date";
+	d2rq:column "checksum_history.process_end_date";
+	d2rq:datatype xsd:dateTime;
+	.
+map:checksum_history_checksum_expected a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property vocab:checksum_history_checksum_expected;
+	d2rq:propertyDefinitionLabel "checksum_history checksum_expected";
+	d2rq:column "checksum_history.checksum_expected";
+	.
+map:checksum_history_checksum_calculated a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property vocab:checksum_history_checksum_calculated;
+	d2rq:propertyDefinitionLabel "checksum_history checksum_calculated";
+	d2rq:column "checksum_history.checksum_calculated";
+	.
+map:checksum_history_result__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_history;
+	d2rq:property vocab:checksum_history_result;
+	d2rq:refersToClassMap map:checksum_results;
+	d2rq:join "checksum_history.result => checksum_results.result_code";
+	.
+
+# Table checksum_results
+map:checksum_results a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "checksum_results/@@checksum_results.result_code|urlify@@";
+	d2rq:class vocab:checksum_results;
+	d2rq:classDefinitionLabel "checksum_results";
+	.
+map:checksum_results__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_results;
+	d2rq:property rdfs:label;
+	d2rq:pattern "checksum_results #@@checksum_results.result_code@@";
+	.
+map:checksum_results_result_code a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_results;
+	d2rq:property vocab:checksum_results_result_code;
+	d2rq:propertyDefinitionLabel "checksum_results result_code";
+	d2rq:column "checksum_results.result_code";
+	.
+map:checksum_results_result_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:checksum_results;
+	d2rq:property vocab:checksum_results_result_description;
+	d2rq:propertyDefinitionLabel "checksum_results result_description";
+	d2rq:column "checksum_results.result_description";
+	.
+
+# Table collection
+map:collection a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "collection/@@collection.collection_id@@";
+	d2rq:class vocab:collection;
+	d2rq:classDefinitionLabel "collection";
+	.
+map:collection__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property rdfs:label;
+	d2rq:pattern "collection #@@collection.collection_id@@";
+	.
+map:collection_collection_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_collection_id;
+	d2rq:propertyDefinitionLabel "collection collection_id";
+	d2rq:column "collection.collection_id";
+	d2rq:datatype xsd:integer;
+	.
+map:collection_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_name;
+	d2rq:propertyDefinitionLabel "collection name";
+	d2rq:column "collection.name";
+	.
+map:collection_short_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_short_description;
+	d2rq:propertyDefinitionLabel "collection short_description";
+	d2rq:column "collection.short_description";
+	.
+map:collection_introductory_text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_introductory_text;
+	d2rq:propertyDefinitionLabel "collection introductory_text";
+	d2rq:column "collection.introductory_text";
+	.
+map:collection_provenance_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_provenance_description;
+	d2rq:propertyDefinitionLabel "collection provenance_description";
+	d2rq:column "collection.provenance_description";
+	.
+map:collection_license a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_license;
+	d2rq:propertyDefinitionLabel "collection license";
+	d2rq:column "collection.license";
+	.
+map:collection_copyright_text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_copyright_text;
+	d2rq:propertyDefinitionLabel "collection copyright_text";
+	d2rq:column "collection.copyright_text";
+	.
+map:collection_side_bar_text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_side_bar_text;
+	d2rq:propertyDefinitionLabel "collection side_bar_text";
+	d2rq:column "collection.side_bar_text";
+	.
+map:collection_submitter__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_submitter;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "collection.submitter => epersongroup.eperson_group_id";
+	.
+map:collection_template_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_template_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "collection.template_item_id => item.item_id";
+	.
+map:collection_workflow_step_1__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_workflow_step_1;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "collection.workflow_step_1 => epersongroup.eperson_group_id";
+	.
+map:collection_workflow_step_2__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_workflow_step_2;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "collection.workflow_step_2 => epersongroup.eperson_group_id";
+	.
+map:collection_admin__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_admin;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "collection.admin => epersongroup.eperson_group_id";
+	.
+map:collection_logo_bitstream_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_logo_bitstream_id;
+	d2rq:refersToClassMap map:bitstream;
+	d2rq:join "collection.logo_bitstream_id => bitstream.bitstream_id";
+	.
+map:collection_workflow_step_3__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection;
+	d2rq:property vocab:collection_workflow_step_3;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "collection.workflow_step_3 => epersongroup.eperson_group_id";
+	.
+
+# Table collection2item
+map:collection2item a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "collection2item/@@collection2item.id@@";
+	d2rq:class vocab:collection2item;
+	d2rq:classDefinitionLabel "collection2item";
+	.
+map:collection2item__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection2item;
+	d2rq:property rdfs:label;
+	d2rq:pattern "collection2item #@@collection2item.id@@";
+	.
+map:collection2item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection2item;
+	d2rq:property vocab:collection2item_id;
+	d2rq:propertyDefinitionLabel "collection2item id";
+	d2rq:column "collection2item.id";
+	d2rq:datatype xsd:integer;
+	.
+map:collection2item_collection_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection2item;
+	d2rq:property vocab:collection2item_collection_id;
+	d2rq:refersToClassMap map:collection;
+	d2rq:join "collection2item.collection_id => collection.collection_id";
+	.
+map:collection2item_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection2item;
+	d2rq:property vocab:collection2item_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "collection2item.item_id => item.item_id";
+	.
+
+# Table collection_item_count
+map:collection_item_count a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "collection_item_count/@@collection_item_count.collection_id@@";
+	d2rq:class vocab:collection_item_count;
+	d2rq:classDefinitionLabel "collection_item_count";
+	.
+map:collection_item_count__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection_item_count;
+	d2rq:property rdfs:label;
+	d2rq:pattern "collection_item_count #@@collection_item_count.collection_id@@";
+	.
+map:collection_item_count_count a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection_item_count;
+	d2rq:property vocab:collection_item_count_count;
+	d2rq:propertyDefinitionLabel "collection_item_count count";
+	d2rq:column "collection_item_count.count";
+	d2rq:datatype xsd:integer;
+	.
+map:collection_item_count_collection_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:collection_item_count;
+	d2rq:property vocab:collection_item_count_collection_id;
+	d2rq:refersToClassMap map:collection;
+	d2rq:join "collection_item_count.collection_id => collection.collection_id";
+	.
+
+# Table communities2item
+map:communities2item a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "communities2item/@@communities2item.id@@";
+	d2rq:class vocab:communities2item;
+	d2rq:classDefinitionLabel "communities2item";
+	.
+map:communities2item__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:communities2item;
+	d2rq:property rdfs:label;
+	d2rq:pattern "communities2item #@@communities2item.id@@";
+	.
+map:communities2item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:communities2item;
+	d2rq:property vocab:communities2item_id;
+	d2rq:propertyDefinitionLabel "communities2item id";
+	d2rq:column "communities2item.id";
+	d2rq:datatype xsd:integer;
+	.
+map:communities2item_community_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:communities2item;
+	d2rq:property vocab:communities2item_community_id;
+	d2rq:refersToClassMap map:community;
+	d2rq:join "communities2item.community_id => community.community_id";
+	.
+map:communities2item_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:communities2item;
+	d2rq:property vocab:communities2item_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "communities2item.item_id => item.item_id";
+	.
+
+# Table community
+map:community a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "community/@@community.community_id@@";
+	d2rq:class vocab:community;
+	d2rq:classDefinitionLabel "community";
+	.
+map:community__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property rdfs:label;
+	d2rq:pattern "community #@@community.community_id@@";
+	.
+map:community_community_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_community_id;
+	d2rq:propertyDefinitionLabel "community community_id";
+	d2rq:column "community.community_id";
+	d2rq:datatype xsd:integer;
+	.
+map:community_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_name;
+	d2rq:propertyDefinitionLabel "community name";
+	d2rq:column "community.name";
+	.
+map:community_short_description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_short_description;
+	d2rq:propertyDefinitionLabel "community short_description";
+	d2rq:column "community.short_description";
+	.
+map:community_introductory_text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_introductory_text;
+	d2rq:propertyDefinitionLabel "community introductory_text";
+	d2rq:column "community.introductory_text";
+	.
+map:community_copyright_text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_copyright_text;
+	d2rq:propertyDefinitionLabel "community copyright_text";
+	d2rq:column "community.copyright_text";
+	.
+map:community_side_bar_text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_side_bar_text;
+	d2rq:propertyDefinitionLabel "community side_bar_text";
+	d2rq:column "community.side_bar_text";
+	.
+map:community_logo_bitstream_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_logo_bitstream_id;
+	d2rq:refersToClassMap map:bitstream;
+	d2rq:join "community.logo_bitstream_id => bitstream.bitstream_id";
+	.
+map:community_admin__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community;
+	d2rq:property vocab:community_admin;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "community.admin => epersongroup.eperson_group_id";
+	.
+
+# Table community2collection
+map:community2collection a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "community2collection/@@community2collection.id@@";
+	d2rq:class vocab:community2collection;
+	d2rq:classDefinitionLabel "community2collection";
+	.
+map:community2collection__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2collection;
+	d2rq:property rdfs:label;
+	d2rq:pattern "community2collection #@@community2collection.id@@";
+	.
+map:community2collection_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2collection;
+	d2rq:property vocab:community2collection_id;
+	d2rq:propertyDefinitionLabel "community2collection id";
+	d2rq:column "community2collection.id";
+	d2rq:datatype xsd:integer;
+	.
+map:community2collection_community_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2collection;
+	d2rq:property vocab:community2collection_community_id;
+	d2rq:refersToClassMap map:community;
+	d2rq:join "community2collection.community_id => community.community_id";
+	.
+map:community2collection_collection_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2collection;
+	d2rq:property vocab:community2collection_collection_id;
+	d2rq:refersToClassMap map:collection;
+	d2rq:join "community2collection.collection_id => collection.collection_id";
+	.
+
+# Table community2community
+map:community2community a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "community2community/@@community2community.id@@";
+	d2rq:class vocab:community2community;
+	d2rq:classDefinitionLabel "community2community";
+	.
+map:community2community__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2community;
+	d2rq:property rdfs:label;
+	d2rq:pattern "community2community #@@community2community.id@@";
+	.
+map:community2community_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2community;
+	d2rq:property vocab:community2community_id;
+	d2rq:propertyDefinitionLabel "community2community id";
+	d2rq:column "community2community.id";
+	d2rq:datatype xsd:integer;
+	.
+map:community2community_child_comm_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2community;
+	d2rq:property vocab:community2community_child_comm_id;
+	d2rq:refersToClassMap map:community;
+	d2rq:join "community2community.child_comm_id => community.community_id";
+	.
+map:community2community_parent_comm_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2community;
+	d2rq:property vocab:community2community_parent_comm_id;
+	d2rq:refersToClassMap map:community;
+	d2rq:join "community2community.parent_comm_id => community.community_id";
+	.
+
+# Table community_item_count
+map:community_item_count a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "community_item_count/@@community_item_count.community_id@@";
+	d2rq:class vocab:community_item_count;
+	d2rq:classDefinitionLabel "community_item_count";
+	.
+map:community_item_count__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community_item_count;
+	d2rq:property rdfs:label;
+	d2rq:pattern "community_item_count #@@community_item_count.community_id@@";
+	.
+map:community_item_count_count a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community_item_count;
+	d2rq:property vocab:community_item_count_count;
+	d2rq:propertyDefinitionLabel "community_item_count count";
+	d2rq:column "community_item_count.count";
+	d2rq:datatype xsd:integer;
+	.
+map:community_item_count_community_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community_item_count;
+	d2rq:property vocab:community_item_count_community_id;
+	d2rq:refersToClassMap map:community;
+	d2rq:join "community_item_count.community_id => community.community_id";
+	.
+
+# Table doi
+map:doi a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "doi/@@doi.doi_id@@";
+	d2rq:class vocab:doi;
+	d2rq:classDefinitionLabel "doi";
+	.
+map:doi__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:doi;
+	d2rq:property rdfs:label;
+	d2rq:pattern "doi #@@doi.doi_id@@";
+	.
+map:doi_doi_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:doi;
+	d2rq:property vocab:doi_doi_id;
+	d2rq:propertyDefinitionLabel "doi doi_id";
+	d2rq:column "doi.doi_id";
+	d2rq:datatype xsd:integer;
+	.
+map:doi_doi a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:doi;
+	d2rq:property vocab:doi_doi;
+	d2rq:propertyDefinitionLabel "doi doi";
+	d2rq:column "doi.doi";
+	.
+map:doi_resource_type_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:doi;
+	d2rq:property vocab:doi_resource_type_id;
+	d2rq:propertyDefinitionLabel "doi resource_type_id";
+	d2rq:column "doi.resource_type_id";
+	d2rq:datatype xsd:integer;
+	.
+map:doi_resource_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:doi;
+	d2rq:property vocab:doi_resource_id;
+	d2rq:propertyDefinitionLabel "doi resource_id";
+	d2rq:column "doi.resource_id";
+	d2rq:datatype xsd:integer;
+	.
+map:doi_status a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:doi;
+	d2rq:property vocab:doi_status;
+	d2rq:propertyDefinitionLabel "doi status";
+	d2rq:column "doi.status";
+	d2rq:datatype xsd:integer;
+	.
+
+# Table dominio_captura
+map:dominio_captura a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dominio_captura/@@dominio_captura.id@@";
+	d2rq:class vocab:dominio_captura;
+	d2rq:classDefinitionLabel "dominio_captura";
+	.
+map:dominio_captura__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dominio_captura;
+	d2rq:property rdfs:label;
+	d2rq:pattern "dominio_captura #@@dominio_captura.id@@";
+	.
+map:dominio_captura_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dominio_captura;
+	d2rq:property vocab:dominio_captura_id;
+	d2rq:propertyDefinitionLabel "dominio_captura id";
+	d2rq:column "dominio_captura.id";
+	d2rq:datatype xsd:integer;
+	.
+map:dominio_captura_repositorio a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dominio_captura;
+	d2rq:property vocab:dominio_captura_repositorio;
+	d2rq:propertyDefinitionLabel "dominio_captura repositorio";
+	d2rq:column "dominio_captura.repositorio";
+	.
+map:dominio_captura_captura a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dominio_captura;
+	d2rq:property vocab:dominio_captura_captura;
+	d2rq:propertyDefinitionLabel "dominio_captura captura";
+	d2rq:column "dominio_captura.captura";
+	.
+
+# Table eperson
+map:eperson a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "eperson/@@eperson.eperson_id@@";
+	d2rq:class vocab:eperson;
+	d2rq:classDefinitionLabel "eperson";
+	.
+map:eperson__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property rdfs:label;
+	d2rq:pattern "eperson #@@eperson.eperson_id@@";
+	.
+map:eperson_eperson_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_eperson_id;
+	d2rq:propertyDefinitionLabel "eperson eperson_id";
+	d2rq:column "eperson.eperson_id";
+	d2rq:datatype xsd:integer;
+	.
+map:eperson_email a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_email;
+	d2rq:propertyDefinitionLabel "eperson email";
+	d2rq:column "eperson.email";
+	.
+map:eperson_password a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_password;
+	d2rq:propertyDefinitionLabel "eperson password";
+	d2rq:column "eperson.password";
+	.
+map:eperson_firstname a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_firstname;
+	d2rq:propertyDefinitionLabel "eperson firstname";
+	d2rq:column "eperson.firstname";
+	.
+map:eperson_lastname a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_lastname;
+	d2rq:propertyDefinitionLabel "eperson lastname";
+	d2rq:column "eperson.lastname";
+	.
+map:eperson_can_log_in a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_can_log_in;
+	d2rq:propertyDefinitionLabel "eperson can_log_in";
+	d2rq:column "eperson.can_log_in";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:eperson_require_certificate a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_require_certificate;
+	d2rq:propertyDefinitionLabel "eperson require_certificate";
+	d2rq:column "eperson.require_certificate";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:eperson_self_registered a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_self_registered;
+	d2rq:propertyDefinitionLabel "eperson self_registered";
+	d2rq:column "eperson.self_registered";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:eperson_last_active a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_last_active;
+	d2rq:propertyDefinitionLabel "eperson last_active";
+	d2rq:column "eperson.last_active";
+	d2rq:datatype xsd:dateTime;
+	.
+map:eperson_sub_frequency a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_sub_frequency;
+	d2rq:propertyDefinitionLabel "eperson sub_frequency";
+	d2rq:column "eperson.sub_frequency";
+	d2rq:datatype xsd:integer;
+	.
+map:eperson_phone a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_phone;
+	d2rq:propertyDefinitionLabel "eperson phone";
+	d2rq:column "eperson.phone";
+	.
+map:eperson_netid a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_netid;
+	d2rq:propertyDefinitionLabel "eperson netid";
+	d2rq:column "eperson.netid";
+	.
+map:eperson_language a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_language;
+	d2rq:propertyDefinitionLabel "eperson language";
+	d2rq:column "eperson.language";
+	.
+map:eperson_salt a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_salt;
+	d2rq:propertyDefinitionLabel "eperson salt";
+	d2rq:column "eperson.salt";
+	.
+map:eperson_digest_algorithm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:eperson;
+	d2rq:property vocab:eperson_digest_algorithm;
+	d2rq:propertyDefinitionLabel "eperson digest_algorithm";
+	d2rq:column "eperson.digest_algorithm";
+	.
+
+# Table epersongroup
+map:epersongroup a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "epersongroup/@@epersongroup.eperson_group_id@@";
+	d2rq:class vocab:epersongroup;
+	d2rq:classDefinitionLabel "epersongroup";
+	.
+map:epersongroup__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup;
+	d2rq:property rdfs:label;
+	d2rq:pattern "epersongroup #@@epersongroup.eperson_group_id@@";
+	.
+map:epersongroup_eperson_group_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup;
+	d2rq:property vocab:epersongroup_eperson_group_id;
+	d2rq:propertyDefinitionLabel "epersongroup eperson_group_id";
+	d2rq:column "epersongroup.eperson_group_id";
+	d2rq:datatype xsd:integer;
+	.
+map:epersongroup_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup;
+	d2rq:property vocab:epersongroup_name;
+	d2rq:propertyDefinitionLabel "epersongroup name";
+	d2rq:column "epersongroup.name";
+	.
+
+# Table epersongroup2eperson
+map:epersongroup2eperson a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "epersongroup2eperson/@@epersongroup2eperson.id@@";
+	d2rq:class vocab:epersongroup2eperson;
+	d2rq:classDefinitionLabel "epersongroup2eperson";
+	.
+map:epersongroup2eperson__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2eperson;
+	d2rq:property rdfs:label;
+	d2rq:pattern "epersongroup2eperson #@@epersongroup2eperson.id@@";
+	.
+map:epersongroup2eperson_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2eperson;
+	d2rq:property vocab:epersongroup2eperson_id;
+	d2rq:propertyDefinitionLabel "epersongroup2eperson id";
+	d2rq:column "epersongroup2eperson.id";
+	d2rq:datatype xsd:integer;
+	.
+map:epersongroup2eperson_eperson_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2eperson;
+	d2rq:property vocab:epersongroup2eperson_eperson_id;
+	d2rq:refersToClassMap map:eperson;
+	d2rq:join "epersongroup2eperson.eperson_id => eperson.eperson_id";
+	.
+map:epersongroup2eperson_eperson_group_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2eperson;
+	d2rq:property vocab:epersongroup2eperson_eperson_group_id;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "epersongroup2eperson.eperson_group_id => epersongroup.eperson_group_id";
+	.
+
+# Table epersongroup2workspaceitem
+map:epersongroup2workspaceitem a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "epersongroup2workspaceitem/@@epersongroup2workspaceitem.id@@";
+	d2rq:class vocab:epersongroup2workspaceitem;
+	d2rq:classDefinitionLabel "epersongroup2workspaceitem";
+	.
+map:epersongroup2workspaceitem__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2workspaceitem;
+	d2rq:property rdfs:label;
+	d2rq:pattern "epersongroup2workspaceitem #@@epersongroup2workspaceitem.id@@";
+	.
+map:epersongroup2workspaceitem_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2workspaceitem;
+	d2rq:property vocab:epersongroup2workspaceitem_id;
+	d2rq:propertyDefinitionLabel "epersongroup2workspaceitem id";
+	d2rq:column "epersongroup2workspaceitem.id";
+	d2rq:datatype xsd:integer;
+	.
+map:epersongroup2workspaceitem_workspace_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2workspaceitem;
+	d2rq:property vocab:epersongroup2workspaceitem_workspace_item_id;
+	d2rq:refersToClassMap map:workspaceitem;
+	d2rq:join "epersongroup2workspaceitem.workspace_item_id => workspaceitem.workspace_item_id";
+	.
+map:epersongroup2workspaceitem_eperson_group_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:epersongroup2workspaceitem;
+	d2rq:property vocab:epersongroup2workspaceitem_eperson_group_id;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "epersongroup2workspaceitem.eperson_group_id => epersongroup.eperson_group_id";
+	.
+
+# Table fileextension
+map:fileextension a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "fileextension/@@fileextension.file_extension_id@@";
+	d2rq:class vocab:fileextension;
+	d2rq:classDefinitionLabel "fileextension";
+	.
+map:fileextension__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:fileextension;
+	d2rq:property rdfs:label;
+	d2rq:pattern "fileextension #@@fileextension.file_extension_id@@";
+	.
+map:fileextension_file_extension_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:fileextension;
+	d2rq:property vocab:fileextension_file_extension_id;
+	d2rq:propertyDefinitionLabel "fileextension file_extension_id";
+	d2rq:column "fileextension.file_extension_id";
+	d2rq:datatype xsd:integer;
+	.
+map:fileextension_extension a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:fileextension;
+	d2rq:property vocab:fileextension_extension;
+	d2rq:propertyDefinitionLabel "fileextension extension";
+	d2rq:column "fileextension.extension";
+	.
+map:fileextension_bitstream_format_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:fileextension;
+	d2rq:property vocab:fileextension_bitstream_format_id;
+	d2rq:refersToClassMap map:bitstreamformatregistry;
+	d2rq:join "fileextension.bitstream_format_id => bitstreamformatregistry.bitstream_format_id";
+	.
+
+# Table group2group
+map:group2group a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "group2group/@@group2group.id@@";
+	d2rq:class vocab:group2group;
+	d2rq:classDefinitionLabel "group2group";
+	.
+map:group2group__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2group;
+	d2rq:property rdfs:label;
+	d2rq:pattern "group2group #@@group2group.id@@";
+	.
+map:group2group_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2group;
+	d2rq:property vocab:group2group_id;
+	d2rq:propertyDefinitionLabel "group2group id";
+	d2rq:column "group2group.id";
+	d2rq:datatype xsd:integer;
+	.
+map:group2group_child_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2group;
+	d2rq:property vocab:group2group_child_id;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "group2group.child_id => epersongroup.eperson_group_id";
+	.
+map:group2group_parent_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2group;
+	d2rq:property vocab:group2group_parent_id;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "group2group.parent_id => epersongroup.eperson_group_id";
+	.
+
+# Table group2groupcache
+map:group2groupcache a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "group2groupcache/@@group2groupcache.id@@";
+	d2rq:class vocab:group2groupcache;
+	d2rq:classDefinitionLabel "group2groupcache";
+	.
+map:group2groupcache__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2groupcache;
+	d2rq:property rdfs:label;
+	d2rq:pattern "group2groupcache #@@group2groupcache.id@@";
+	.
+map:group2groupcache_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2groupcache;
+	d2rq:property vocab:group2groupcache_id;
+	d2rq:propertyDefinitionLabel "group2groupcache id";
+	d2rq:column "group2groupcache.id";
+	d2rq:datatype xsd:integer;
+	.
+map:group2groupcache_parent_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2groupcache;
+	d2rq:property vocab:group2groupcache_parent_id;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "group2groupcache.parent_id => epersongroup.eperson_group_id";
+	.
+map:group2groupcache_child_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:group2groupcache;
+	d2rq:property vocab:group2groupcache_child_id;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "group2groupcache.child_id => epersongroup.eperson_group_id";
+	.
+
+# Table handle
+map:handle a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "handle/@@handle.handle_id@@";
+	d2rq:class vocab:handle;
+	d2rq:classDefinitionLabel "handle";
+	.
+map:handle__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:handle;
+	d2rq:property rdfs:label;
+	d2rq:pattern "handle #@@handle.handle_id@@";
+	.
+map:handle_handle_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:handle;
+	d2rq:property vocab:handle_handle_id;
+	d2rq:propertyDefinitionLabel "handle handle_id";
+	d2rq:column "handle.handle_id";
+	d2rq:datatype xsd:integer;
+	.
+map:handle_handle a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:handle;
+	d2rq:property vocab:handle_handle;
+	d2rq:propertyDefinitionLabel "handle handle";
+	d2rq:column "handle.handle";
+	.
+map:handle_resource_type_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:handle;
+	d2rq:property vocab:handle_resource_type_id;
+	d2rq:propertyDefinitionLabel "handle resource_type_id";
+	d2rq:column "handle.resource_type_id";
+	d2rq:datatype xsd:integer;
+	.
+map:handle_resource_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:handle;
+	d2rq:property vocab:handle_resource_id;
+	d2rq:propertyDefinitionLabel "handle resource_id";
+	d2rq:column "handle.resource_id";
+	d2rq:datatype xsd:integer;
+	.
+
+# Table harvested_collection
+map:harvested_collection a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "harvested_collection/@@harvested_collection.id@@";
+	d2rq:class vocab:harvested_collection;
+	d2rq:classDefinitionLabel "harvested_collection";
+	.
+map:harvested_collection__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property rdfs:label;
+	d2rq:pattern "harvested_collection #@@harvested_collection.id@@";
+	.
+map:harvested_collection_harvest_type a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_harvest_type;
+	d2rq:propertyDefinitionLabel "harvested_collection harvest_type";
+	d2rq:column "harvested_collection.harvest_type";
+	d2rq:datatype xsd:integer;
+	.
+map:harvested_collection_oai_source a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_oai_source;
+	d2rq:propertyDefinitionLabel "harvested_collection oai_source";
+	d2rq:column "harvested_collection.oai_source";
+	.
+map:harvested_collection_oai_set_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_oai_set_id;
+	d2rq:propertyDefinitionLabel "harvested_collection oai_set_id";
+	d2rq:column "harvested_collection.oai_set_id";
+	.
+map:harvested_collection_harvest_message a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_harvest_message;
+	d2rq:propertyDefinitionLabel "harvested_collection harvest_message";
+	d2rq:column "harvested_collection.harvest_message";
+	.
+map:harvested_collection_metadata_config_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_metadata_config_id;
+	d2rq:propertyDefinitionLabel "harvested_collection metadata_config_id";
+	d2rq:column "harvested_collection.metadata_config_id";
+	.
+map:harvested_collection_harvest_status a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_harvest_status;
+	d2rq:propertyDefinitionLabel "harvested_collection harvest_status";
+	d2rq:column "harvested_collection.harvest_status";
+	d2rq:datatype xsd:integer;
+	.
+map:harvested_collection_harvest_start_time a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_harvest_start_time;
+	d2rq:propertyDefinitionLabel "harvested_collection harvest_start_time";
+	d2rq:column "harvested_collection.harvest_start_time";
+	d2rq:datatype xsd:dateTime;
+	.
+map:harvested_collection_last_harvested a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_last_harvested;
+	d2rq:propertyDefinitionLabel "harvested_collection last_harvested";
+	d2rq:column "harvested_collection.last_harvested";
+	d2rq:datatype xsd:dateTime;
+	.
+map:harvested_collection_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_id;
+	d2rq:propertyDefinitionLabel "harvested_collection id";
+	d2rq:column "harvested_collection.id";
+	d2rq:datatype xsd:integer;
+	.
+map:harvested_collection_collection_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_collection;
+	d2rq:property vocab:harvested_collection_collection_id;
+	d2rq:refersToClassMap map:collection;
+	d2rq:join "harvested_collection.collection_id => collection.collection_id";
+	.
+
+# Table harvested_item
+map:harvested_item a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "harvested_item/@@harvested_item.id@@";
+	d2rq:class vocab:harvested_item;
+	d2rq:classDefinitionLabel "harvested_item";
+	.
+map:harvested_item__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_item;
+	d2rq:property rdfs:label;
+	d2rq:pattern "harvested_item #@@harvested_item.id@@";
+	.
+map:harvested_item_last_harvested a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_item;
+	d2rq:property vocab:harvested_item_last_harvested;
+	d2rq:propertyDefinitionLabel "harvested_item last_harvested";
+	d2rq:column "harvested_item.last_harvested";
+	d2rq:datatype xsd:dateTime;
+	.
+map:harvested_item_oai_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_item;
+	d2rq:property vocab:harvested_item_oai_id;
+	d2rq:propertyDefinitionLabel "harvested_item oai_id";
+	d2rq:column "harvested_item.oai_id";
+	.
+map:harvested_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_item;
+	d2rq:property vocab:harvested_item_id;
+	d2rq:propertyDefinitionLabel "harvested_item id";
+	d2rq:column "harvested_item.id";
+	d2rq:datatype xsd:integer;
+	.
+map:harvested_item_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:harvested_item;
+	d2rq:property vocab:harvested_item_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "harvested_item.item_id => item.item_id";
+	.
+
+# Table item
+map:item a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "item/@@item.item_id@@";
+	d2rq:class vocab:item;
+	d2rq:classDefinitionLabel "item";
+	.
+map:item__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property rdfs:label;
+	d2rq:pattern "item #@@item.item_id@@";
+	.
+map:item_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property vocab:item_item_id;
+	d2rq:propertyDefinitionLabel "item item_id";
+	d2rq:column "item.item_id";
+	d2rq:datatype xsd:integer;
+	.
+map:item_in_archive a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property vocab:item_in_archive;
+	d2rq:propertyDefinitionLabel "item in_archive";
+	d2rq:column "item.in_archive";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:item_withdrawn a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property vocab:item_withdrawn;
+	d2rq:propertyDefinitionLabel "item withdrawn";
+	d2rq:column "item.withdrawn";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:item_last_modified a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property vocab:item_last_modified;
+	d2rq:propertyDefinitionLabel "item last_modified";
+	d2rq:column "item.last_modified";
+	d2rq:datatype xsd:dateTime;
+	.
+map:item_owning_collection a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property vocab:item_owning_collection;
+	d2rq:propertyDefinitionLabel "item owning_collection";
+	d2rq:column "item.owning_collection";
+	d2rq:datatype xsd:integer;
+	.
+map:item_discoverable a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property vocab:item_discoverable;
+	d2rq:propertyDefinitionLabel "item discoverable";
+	d2rq:column "item.discoverable";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:item_submitter_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item;
+	d2rq:property vocab:item_submitter_id;
+	d2rq:refersToClassMap map:eperson;
+	d2rq:join "item.submitter_id => eperson.eperson_id";
+	.
+
+# Table item2bundle
+map:item2bundle a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "item2bundle/@@item2bundle.id@@";
+	d2rq:class vocab:item2bundle;
+	d2rq:classDefinitionLabel "item2bundle";
+	.
+map:item2bundle__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item2bundle;
+	d2rq:property rdfs:label;
+	d2rq:pattern "item2bundle #@@item2bundle.id@@";
+	.
+map:item2bundle_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item2bundle;
+	d2rq:property vocab:item2bundle_id;
+	d2rq:propertyDefinitionLabel "item2bundle id";
+	d2rq:column "item2bundle.id";
+	d2rq:datatype xsd:integer;
+	.
+map:item2bundle_bundle_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item2bundle;
+	d2rq:property vocab:item2bundle_bundle_id;
+	d2rq:refersToClassMap map:bundle;
+	d2rq:join "item2bundle.bundle_id => bundle.bundle_id";
+	.
+map:item2bundle_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:item2bundle;
+	d2rq:property vocab:item2bundle_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "item2bundle.item_id => item.item_id";
+	.
+
+# Table metadatafieldregistry
+map:metadatafieldregistry a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "metadatafieldregistry/@@metadatafieldregistry.metadata_field_id@@";
+	d2rq:class vocab:metadatafieldregistry;
+	d2rq:classDefinitionLabel "metadatafieldregistry";
+	.
+map:metadatafieldregistry__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatafieldregistry;
+	d2rq:property rdfs:label;
+	d2rq:pattern "metadatafieldregistry #@@metadatafieldregistry.metadata_field_id@@";
+	.
+map:metadatafieldregistry_metadata_field_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatafieldregistry;
+	d2rq:property vocab:metadatafieldregistry_metadata_field_id;
+	d2rq:propertyDefinitionLabel "metadatafieldregistry metadata_field_id";
+	d2rq:column "metadatafieldregistry.metadata_field_id";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatafieldregistry_element a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatafieldregistry;
+	d2rq:property vocab:metadatafieldregistry_element;
+	d2rq:propertyDefinitionLabel "metadatafieldregistry element";
+	d2rq:column "metadatafieldregistry.element";
+	.
+map:metadatafieldregistry_qualifier a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatafieldregistry;
+	d2rq:property vocab:metadatafieldregistry_qualifier;
+	d2rq:propertyDefinitionLabel "metadatafieldregistry qualifier";
+	d2rq:column "metadatafieldregistry.qualifier";
+	.
+map:metadatafieldregistry_scope_note a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatafieldregistry;
+	d2rq:property vocab:metadatafieldregistry_scope_note;
+	d2rq:propertyDefinitionLabel "metadatafieldregistry scope_note";
+	d2rq:column "metadatafieldregistry.scope_note";
+	.
+map:metadatafieldregistry_metadata_schema_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatafieldregistry;
+	d2rq:property vocab:metadatafieldregistry_metadata_schema_id;
+	d2rq:refersToClassMap map:metadataschemaregistry;
+	d2rq:join "metadatafieldregistry.metadata_schema_id => metadataschemaregistry.metadata_schema_id";
+	.
+
+# Table metadataschemaregistry
+map:metadataschemaregistry a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "metadataschemaregistry/@@metadataschemaregistry.metadata_schema_id@@";
+	d2rq:class vocab:metadataschemaregistry;
+	d2rq:classDefinitionLabel "metadataschemaregistry";
+	.
+map:metadataschemaregistry__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadataschemaregistry;
+	d2rq:property rdfs:label;
+	d2rq:pattern "metadataschemaregistry #@@metadataschemaregistry.metadata_schema_id@@";
+	.
+map:metadataschemaregistry_metadata_schema_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadataschemaregistry;
+	d2rq:property vocab:metadataschemaregistry_metadata_schema_id;
+	d2rq:propertyDefinitionLabel "metadataschemaregistry metadata_schema_id";
+	d2rq:column "metadataschemaregistry.metadata_schema_id";
+	d2rq:datatype xsd:integer;
+	.
+map:metadataschemaregistry_namespace a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadataschemaregistry;
+	d2rq:property vocab:metadataschemaregistry_namespace;
+	d2rq:propertyDefinitionLabel "metadataschemaregistry namespace";
+	d2rq:column "metadataschemaregistry.namespace";
+	.
+map:metadataschemaregistry_short_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadataschemaregistry;
+	d2rq:property vocab:metadataschemaregistry_short_id;
+	d2rq:propertyDefinitionLabel "metadataschemaregistry short_id";
+	d2rq:column "metadataschemaregistry.short_id";
+	.
+
+# Table metadatavalue
+map:metadatavalue a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "metadatavalue/@@metadatavalue.metadata_value_id@@";
+	d2rq:class vocab:metadatavalue;
+	d2rq:classDefinitionLabel "metadatavalue";
+	.
+map:metadatavalue__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property rdfs:label;
+	d2rq:pattern "metadatavalue #@@metadatavalue.metadata_value_id@@";
+	.
+map:metadatavalue_metadata_value_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_metadata_value_id;
+	d2rq:propertyDefinitionLabel "metadatavalue metadata_value_id";
+	d2rq:column "metadatavalue.metadata_value_id";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatavalue_text_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_text_value;
+	d2rq:propertyDefinitionLabel "metadatavalue text_value";
+	d2rq:column "metadatavalue.text_value";
+	.
+map:metadatavalue_text_lang a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_text_lang;
+	d2rq:propertyDefinitionLabel "metadatavalue text_lang";
+	d2rq:column "metadatavalue.text_lang";
+	.
+map:metadatavalue_place a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_place;
+	d2rq:propertyDefinitionLabel "metadatavalue place";
+	d2rq:column "metadatavalue.place";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatavalue_authority a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_authority;
+	d2rq:propertyDefinitionLabel "metadatavalue authority";
+	d2rq:column "metadatavalue.authority";
+	.
+map:metadatavalue_confidence a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_confidence;
+	d2rq:propertyDefinitionLabel "metadatavalue confidence";
+	d2rq:column "metadatavalue.confidence";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatavalue_metadata_field_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_metadata_field_id;
+	d2rq:refersToClassMap map:metadatafieldregistry;
+	d2rq:join "metadatavalue.metadata_field_id => metadatafieldregistry.metadata_field_id";
+	.
+map:metadatavalue_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue;
+	d2rq:property vocab:metadatavalue_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "metadatavalue.item_id => item.item_id";
+	.
+
+# Table metadatavalue_captura
+map:metadatavalue_captura a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "metadatavalue_captura/@@metadatavalue_captura.metadata_value_id@@";
+	d2rq:class vocab:metadatavalue_captura;
+	d2rq:classDefinitionLabel "metadatavalue_captura";
+	.
+map:metadatavalue_captura__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property rdfs:label;
+	d2rq:pattern "metadatavalue_captura #@@metadatavalue_captura.metadata_value_id@@";
+	.
+map:metadatavalue_captura_metadata_value_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_metadata_value_id;
+	d2rq:propertyDefinitionLabel "metadatavalue_captura metadata_value_id";
+	d2rq:column "metadatavalue_captura.metadata_value_id";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatavalue_captura_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_item_id;
+	d2rq:propertyDefinitionLabel "metadatavalue_captura item_id";
+	d2rq:column "metadatavalue_captura.item_id";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatavalue_captura_text_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_text_value;
+	d2rq:propertyDefinitionLabel "metadatavalue_captura text_value";
+	d2rq:column "metadatavalue_captura.text_value";
+	.
+map:metadatavalue_captura_text_lang a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_text_lang;
+	d2rq:propertyDefinitionLabel "metadatavalue_captura text_lang";
+	d2rq:column "metadatavalue_captura.text_lang";
+	.
+map:metadatavalue_captura_place a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_place;
+	d2rq:propertyDefinitionLabel "metadatavalue_captura place";
+	d2rq:column "metadatavalue_captura.place";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatavalue_captura_authority a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_authority;
+	d2rq:propertyDefinitionLabel "metadatavalue_captura authority";
+	d2rq:column "metadatavalue_captura.authority";
+	.
+map:metadatavalue_captura_confidence a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_confidence;
+	d2rq:propertyDefinitionLabel "metadatavalue_captura confidence";
+	d2rq:column "metadatavalue_captura.confidence";
+	d2rq:datatype xsd:integer;
+	.
+map:metadatavalue_captura_metadata_field_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:metadatavalue_captura;
+	d2rq:property vocab:metadatavalue_captura_metadata_field_id;
+	d2rq:refersToClassMap map:metadatafieldregistry;
+	d2rq:join "metadatavalue_captura.metadata_field_id => metadatafieldregistry.metadata_field_id";
+	.
+
+# Table most_recent_checksum
+map:most_recent_checksum a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "most_recent_checksum/@@most_recent_checksum.bitstream_id@@";
+	d2rq:class vocab:most_recent_checksum;
+	d2rq:classDefinitionLabel "most_recent_checksum";
+	.
+map:most_recent_checksum__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property rdfs:label;
+	d2rq:pattern "most_recent_checksum #@@most_recent_checksum.bitstream_id@@";
+	.
+map:most_recent_checksum_to_be_processed a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_to_be_processed;
+	d2rq:propertyDefinitionLabel "most_recent_checksum to_be_processed";
+	d2rq:column "most_recent_checksum.to_be_processed";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:most_recent_checksum_expected_checksum a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_expected_checksum;
+	d2rq:propertyDefinitionLabel "most_recent_checksum expected_checksum";
+	d2rq:column "most_recent_checksum.expected_checksum";
+	.
+map:most_recent_checksum_current_checksum a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_current_checksum;
+	d2rq:propertyDefinitionLabel "most_recent_checksum current_checksum";
+	d2rq:column "most_recent_checksum.current_checksum";
+	.
+map:most_recent_checksum_last_process_start_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_last_process_start_date;
+	d2rq:propertyDefinitionLabel "most_recent_checksum last_process_start_date";
+	d2rq:column "most_recent_checksum.last_process_start_date";
+	d2rq:datatype xsd:dateTime;
+	.
+map:most_recent_checksum_last_process_end_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_last_process_end_date;
+	d2rq:propertyDefinitionLabel "most_recent_checksum last_process_end_date";
+	d2rq:column "most_recent_checksum.last_process_end_date";
+	d2rq:datatype xsd:dateTime;
+	.
+map:most_recent_checksum_checksum_algorithm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_checksum_algorithm;
+	d2rq:propertyDefinitionLabel "most_recent_checksum checksum_algorithm";
+	d2rq:column "most_recent_checksum.checksum_algorithm";
+	.
+map:most_recent_checksum_matched_prev_checksum a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_matched_prev_checksum;
+	d2rq:propertyDefinitionLabel "most_recent_checksum matched_prev_checksum";
+	d2rq:column "most_recent_checksum.matched_prev_checksum";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:most_recent_checksum_bitstream_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_bitstream_id;
+	d2rq:refersToClassMap map:bitstream;
+	d2rq:join "most_recent_checksum.bitstream_id => bitstream.bitstream_id";
+	.
+map:most_recent_checksum_result__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:most_recent_checksum;
+	d2rq:property vocab:most_recent_checksum_result;
+	d2rq:refersToClassMap map:checksum_results;
+	d2rq:join "most_recent_checksum.result => checksum_results.result_code";
+	.
+
+# Table registrationdata
+map:registrationdata a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "registrationdata/@@registrationdata.registrationdata_id@@";
+	d2rq:class vocab:registrationdata;
+	d2rq:classDefinitionLabel "registrationdata";
+	.
+map:registrationdata__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:registrationdata;
+	d2rq:property rdfs:label;
+	d2rq:pattern "registrationdata #@@registrationdata.registrationdata_id@@";
+	.
+map:registrationdata_registrationdata_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:registrationdata;
+	d2rq:property vocab:registrationdata_registrationdata_id;
+	d2rq:propertyDefinitionLabel "registrationdata registrationdata_id";
+	d2rq:column "registrationdata.registrationdata_id";
+	d2rq:datatype xsd:integer;
+	.
+map:registrationdata_email a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:registrationdata;
+	d2rq:property vocab:registrationdata_email;
+	d2rq:propertyDefinitionLabel "registrationdata email";
+	d2rq:column "registrationdata.email";
+	.
+map:registrationdata_token a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:registrationdata;
+	d2rq:property vocab:registrationdata_token;
+	d2rq:propertyDefinitionLabel "registrationdata token";
+	d2rq:column "registrationdata.token";
+	.
+map:registrationdata_expires a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:registrationdata;
+	d2rq:property vocab:registrationdata_expires;
+	d2rq:propertyDefinitionLabel "registrationdata expires";
+	d2rq:column "registrationdata.expires";
+	d2rq:datatype xsd:dateTime;
+	.
+
+# Table requestitem
+map:requestitem a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "requestitem/@@requestitem.requestitem_id@@";
+	d2rq:class vocab:requestitem;
+	d2rq:classDefinitionLabel "requestitem";
+	.
+map:requestitem__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property rdfs:label;
+	d2rq:pattern "requestitem #@@requestitem.requestitem_id@@";
+	.
+map:requestitem_requestitem_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_requestitem_id;
+	d2rq:propertyDefinitionLabel "requestitem requestitem_id";
+	d2rq:column "requestitem.requestitem_id";
+	d2rq:datatype xsd:integer;
+	.
+map:requestitem_token a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_token;
+	d2rq:propertyDefinitionLabel "requestitem token";
+	d2rq:column "requestitem.token";
+	.
+map:requestitem_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_item_id;
+	d2rq:propertyDefinitionLabel "requestitem item_id";
+	d2rq:column "requestitem.item_id";
+	d2rq:datatype xsd:integer;
+	.
+map:requestitem_bitstream_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_bitstream_id;
+	d2rq:propertyDefinitionLabel "requestitem bitstream_id";
+	d2rq:column "requestitem.bitstream_id";
+	d2rq:datatype xsd:integer;
+	.
+map:requestitem_allfiles a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_allfiles;
+	d2rq:propertyDefinitionLabel "requestitem allfiles";
+	d2rq:column "requestitem.allfiles";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:requestitem_request_email a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_request_email;
+	d2rq:propertyDefinitionLabel "requestitem request_email";
+	d2rq:column "requestitem.request_email";
+	.
+map:requestitem_request_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_request_name;
+	d2rq:propertyDefinitionLabel "requestitem request_name";
+	d2rq:column "requestitem.request_name";
+	.
+map:requestitem_request_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_request_date;
+	d2rq:propertyDefinitionLabel "requestitem request_date";
+	d2rq:column "requestitem.request_date";
+	d2rq:datatype xsd:dateTime;
+	.
+map:requestitem_accept_request a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_accept_request;
+	d2rq:propertyDefinitionLabel "requestitem accept_request";
+	d2rq:column "requestitem.accept_request";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:requestitem_decision_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_decision_date;
+	d2rq:propertyDefinitionLabel "requestitem decision_date";
+	d2rq:column "requestitem.decision_date";
+	d2rq:datatype xsd:dateTime;
+	.
+map:requestitem_expires a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:requestitem;
+	d2rq:property vocab:requestitem_expires;
+	d2rq:propertyDefinitionLabel "requestitem expires";
+	d2rq:column "requestitem.expires";
+	d2rq:datatype xsd:dateTime;
+	.
+
+# Table resourcepolicy
+map:resourcepolicy a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "resourcepolicy/@@resourcepolicy.policy_id@@";
+	d2rq:class vocab:resourcepolicy;
+	d2rq:classDefinitionLabel "resourcepolicy";
+	.
+map:resourcepolicy__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property rdfs:label;
+	d2rq:pattern "resourcepolicy #@@resourcepolicy.policy_id@@";
+	.
+map:resourcepolicy_policy_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_policy_id;
+	d2rq:propertyDefinitionLabel "resourcepolicy policy_id";
+	d2rq:column "resourcepolicy.policy_id";
+	d2rq:datatype xsd:integer;
+	.
+map:resourcepolicy_resource_type_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_resource_type_id;
+	d2rq:propertyDefinitionLabel "resourcepolicy resource_type_id";
+	d2rq:column "resourcepolicy.resource_type_id";
+	d2rq:datatype xsd:integer;
+	.
+map:resourcepolicy_resource_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_resource_id;
+	d2rq:propertyDefinitionLabel "resourcepolicy resource_id";
+	d2rq:column "resourcepolicy.resource_id";
+	d2rq:datatype xsd:integer;
+	.
+map:resourcepolicy_action_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_action_id;
+	d2rq:propertyDefinitionLabel "resourcepolicy action_id";
+	d2rq:column "resourcepolicy.action_id";
+	d2rq:datatype xsd:integer;
+	.
+map:resourcepolicy_start_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_start_date;
+	d2rq:propertyDefinitionLabel "resourcepolicy start_date";
+	d2rq:column "resourcepolicy.start_date";
+	d2rq:datatype xsd:date;
+	.
+map:resourcepolicy_end_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_end_date;
+	d2rq:propertyDefinitionLabel "resourcepolicy end_date";
+	d2rq:column "resourcepolicy.end_date";
+	d2rq:datatype xsd:date;
+	.
+map:resourcepolicy_rpname a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_rpname;
+	d2rq:propertyDefinitionLabel "resourcepolicy rpname";
+	d2rq:column "resourcepolicy.rpname";
+	.
+map:resourcepolicy_rptype a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_rptype;
+	d2rq:propertyDefinitionLabel "resourcepolicy rptype";
+	d2rq:column "resourcepolicy.rptype";
+	.
+map:resourcepolicy_rpdescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_rpdescription;
+	d2rq:propertyDefinitionLabel "resourcepolicy rpdescription";
+	d2rq:column "resourcepolicy.rpdescription";
+	.
+map:resourcepolicy_eperson_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_eperson_id;
+	d2rq:refersToClassMap map:eperson;
+	d2rq:join "resourcepolicy.eperson_id => eperson.eperson_id";
+	.
+map:resourcepolicy_epersongroup_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:resourcepolicy;
+	d2rq:property vocab:resourcepolicy_epersongroup_id;
+	d2rq:refersToClassMap map:epersongroup;
+	d2rq:join "resourcepolicy.epersongroup_id => epersongroup.eperson_group_id";
+	.
+
+# Table rut_temp
+map:rut_temp a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "rut_temp/@@rut_temp.rut|urlify@@";
+	d2rq:class vocab:rut_temp;
+	d2rq:classDefinitionLabel "rut_temp";
+	.
+map:rut_temp__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:rut_temp;
+	d2rq:property rdfs:label;
+	d2rq:pattern "rut_temp #@@rut_temp.rut@@";
+	.
+map:rut_temp_rut a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:rut_temp;
+	d2rq:property vocab:rut_temp_rut;
+	d2rq:propertyDefinitionLabel "rut_temp rut";
+	d2rq:column "rut_temp.rut";
+	.
+map:rut_temp_nombre a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:rut_temp;
+	d2rq:property vocab:rut_temp_nombre;
+	d2rq:propertyDefinitionLabel "rut_temp nombre";
+	d2rq:column "rut_temp.nombre";
+	.
+
+# Table subscription
+map:subscription a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "subscription/@@subscription.subscription_id@@";
+	d2rq:class vocab:subscription;
+	d2rq:classDefinitionLabel "subscription";
+	.
+map:subscription__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:subscription;
+	d2rq:property rdfs:label;
+	d2rq:pattern "subscription #@@subscription.subscription_id@@";
+	.
+map:subscription_subscription_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:subscription;
+	d2rq:property vocab:subscription_subscription_id;
+	d2rq:propertyDefinitionLabel "subscription subscription_id";
+	d2rq:column "subscription.subscription_id";
+	d2rq:datatype xsd:integer;
+	.
+map:subscription_eperson_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:subscription;
+	d2rq:property vocab:subscription_eperson_id;
+	d2rq:refersToClassMap map:eperson;
+	d2rq:join "subscription.eperson_id => eperson.eperson_id";
+	.
+map:subscription_collection_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:subscription;
+	d2rq:property vocab:subscription_collection_id;
+	d2rq:refersToClassMap map:collection;
+	d2rq:join "subscription.collection_id => collection.collection_id";
+	.
+
+# Table tasklistitem
+map:tasklistitem a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "tasklistitem/@@tasklistitem.tasklist_id@@";
+	d2rq:class vocab:tasklistitem;
+	d2rq:classDefinitionLabel "tasklistitem";
+	.
+map:tasklistitem__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tasklistitem;
+	d2rq:property rdfs:label;
+	d2rq:pattern "tasklistitem #@@tasklistitem.tasklist_id@@";
+	.
+map:tasklistitem_tasklist_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tasklistitem;
+	d2rq:property vocab:tasklistitem_tasklist_id;
+	d2rq:propertyDefinitionLabel "tasklistitem tasklist_id";
+	d2rq:column "tasklistitem.tasklist_id";
+	d2rq:datatype xsd:integer;
+	.
+map:tasklistitem_eperson_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tasklistitem;
+	d2rq:property vocab:tasklistitem_eperson_id;
+	d2rq:refersToClassMap map:eperson;
+	d2rq:join "tasklistitem.eperson_id => eperson.eperson_id";
+	.
+map:tasklistitem_workflow_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tasklistitem;
+	d2rq:property vocab:tasklistitem_workflow_id;
+	d2rq:refersToClassMap map:workflowitem;
+	d2rq:join "tasklistitem.workflow_id => workflowitem.workflow_id";
+	.
+
+# Table temporal
+map:temporal a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "temporal/@@temporal.rut|urlify@@";
+	d2rq:class vocab:temporal;
+	d2rq:classDefinitionLabel "temporal";
+	.
+map:temporal__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:temporal;
+	d2rq:property rdfs:label;
+	d2rq:pattern "temporal #@@temporal.rut@@";
+	.
+map:temporal_rut a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:temporal;
+	d2rq:property vocab:temporal_rut;
+	d2rq:propertyDefinitionLabel "temporal rut";
+	d2rq:column "temporal.rut";
+	.
+map:temporal_text_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:temporal;
+	d2rq:property vocab:temporal_text_value;
+	d2rq:propertyDefinitionLabel "temporal text_value";
+	d2rq:column "temporal.text_value";
+	.
+
+# Table temporal2
+map:temporal2 a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "temporal2/@@temporal2.rut|urlify@@";
+	d2rq:class vocab:temporal2;
+	d2rq:classDefinitionLabel "temporal2";
+	.
+map:temporal2__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:temporal2;
+	d2rq:property rdfs:label;
+	d2rq:pattern "temporal2 #@@temporal2.rut@@";
+	.
+map:temporal2_rut a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:temporal2;
+	d2rq:property vocab:temporal2_rut;
+	d2rq:propertyDefinitionLabel "temporal2 rut";
+	d2rq:column "temporal2.rut";
+	.
+map:temporal2_text_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:temporal2;
+	d2rq:property vocab:temporal2_text_value;
+	d2rq:propertyDefinitionLabel "temporal2 text_value";
+	d2rq:column "temporal2.text_value";
+	.
+
+# Table tmp_bi_2_dis
+map:tmp_bi_2_dis a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "tmp_bi_2_dis/@@tmp_bi_2_dis.id@@";
+	d2rq:class vocab:tmp_bi_2_dis;
+	d2rq:classDefinitionLabel "tmp_bi_2_dis";
+	.
+map:tmp_bi_2_dis__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_bi_2_dis;
+	d2rq:property rdfs:label;
+	d2rq:pattern "tmp_bi_2_dis #@@tmp_bi_2_dis.id@@";
+	.
+map:tmp_bi_2_dis_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_bi_2_dis;
+	d2rq:property vocab:tmp_bi_2_dis_id;
+	d2rq:propertyDefinitionLabel "tmp_bi_2_dis id";
+	d2rq:column "tmp_bi_2_dis.id";
+	d2rq:datatype xsd:integer;
+	.
+map:tmp_bi_2_dis_authority a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_bi_2_dis;
+	d2rq:property vocab:tmp_bi_2_dis_authority;
+	d2rq:propertyDefinitionLabel "tmp_bi_2_dis authority";
+	d2rq:column "tmp_bi_2_dis.authority";
+	.
+map:tmp_bi_2_dis_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_bi_2_dis;
+	d2rq:property vocab:tmp_bi_2_dis_value;
+	d2rq:propertyDefinitionLabel "tmp_bi_2_dis value";
+	d2rq:column "tmp_bi_2_dis.value";
+	.
+map:tmp_bi_2_dis_sort_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_bi_2_dis;
+	d2rq:property vocab:tmp_bi_2_dis_sort_value;
+	d2rq:propertyDefinitionLabel "tmp_bi_2_dis sort_value";
+	d2rq:column "tmp_bi_2_dis.sort_value";
+	.
+map:tmp_bi_2_dis_indiv_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_bi_2_dis;
+	d2rq:property vocab:tmp_bi_2_dis_indiv_id;
+	d2rq:propertyDefinitionLabel "tmp_bi_2_dis indiv_id";
+	d2rq:column "tmp_bi_2_dis.indiv_id";
+	.
+
+# Table tmp_eperson
+map:tmp_eperson a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "tmp_eperson/@@tmp_eperson.eperson_id@@";
+	d2rq:class vocab:tmp_eperson;
+	d2rq:classDefinitionLabel "tmp_eperson";
+	.
+map:tmp_eperson__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property rdfs:label;
+	d2rq:pattern "tmp_eperson #@@tmp_eperson.eperson_id@@";
+	.
+map:tmp_eperson_eperson_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_eperson_id;
+	d2rq:propertyDefinitionLabel "tmp_eperson eperson_id";
+	d2rq:column "tmp_eperson.eperson_id";
+	d2rq:datatype xsd:integer;
+	.
+map:tmp_eperson_email a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_email;
+	d2rq:propertyDefinitionLabel "tmp_eperson email";
+	d2rq:column "tmp_eperson.email";
+	.
+map:tmp_eperson_password a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_password;
+	d2rq:propertyDefinitionLabel "tmp_eperson password";
+	d2rq:column "tmp_eperson.password";
+	.
+map:tmp_eperson_firstname a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_firstname;
+	d2rq:propertyDefinitionLabel "tmp_eperson firstname";
+	d2rq:column "tmp_eperson.firstname";
+	.
+map:tmp_eperson_lastname a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_lastname;
+	d2rq:propertyDefinitionLabel "tmp_eperson lastname";
+	d2rq:column "tmp_eperson.lastname";
+	.
+map:tmp_eperson_can_log_in a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_can_log_in;
+	d2rq:propertyDefinitionLabel "tmp_eperson can_log_in";
+	d2rq:column "tmp_eperson.can_log_in";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:tmp_eperson_require_certificate a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_require_certificate;
+	d2rq:propertyDefinitionLabel "tmp_eperson require_certificate";
+	d2rq:column "tmp_eperson.require_certificate";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:tmp_eperson_self_registered a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_self_registered;
+	d2rq:propertyDefinitionLabel "tmp_eperson self_registered";
+	d2rq:column "tmp_eperson.self_registered";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:tmp_eperson_last_active a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_last_active;
+	d2rq:propertyDefinitionLabel "tmp_eperson last_active";
+	d2rq:column "tmp_eperson.last_active";
+	d2rq:datatype xsd:dateTime;
+	.
+map:tmp_eperson_sub_frequency a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_sub_frequency;
+	d2rq:propertyDefinitionLabel "tmp_eperson sub_frequency";
+	d2rq:column "tmp_eperson.sub_frequency";
+	d2rq:datatype xsd:integer;
+	.
+map:tmp_eperson_phone a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_phone;
+	d2rq:propertyDefinitionLabel "tmp_eperson phone";
+	d2rq:column "tmp_eperson.phone";
+	.
+map:tmp_eperson_netid a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_netid;
+	d2rq:propertyDefinitionLabel "tmp_eperson netid";
+	d2rq:column "tmp_eperson.netid";
+	.
+map:tmp_eperson_language a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_language;
+	d2rq:propertyDefinitionLabel "tmp_eperson language";
+	d2rq:column "tmp_eperson.language";
+	.
+map:tmp_eperson_salt a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_salt;
+	d2rq:propertyDefinitionLabel "tmp_eperson salt";
+	d2rq:column "tmp_eperson.salt";
+	.
+map:tmp_eperson_digest_algorithm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tmp_eperson;
+	d2rq:property vocab:tmp_eperson_digest_algorithm;
+	d2rq:propertyDefinitionLabel "tmp_eperson digest_algorithm";
+	d2rq:column "tmp_eperson.digest_algorithm";
+	.
+
+# Table versionhistory
+map:versionhistory a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "versionhistory/@@versionhistory.versionhistory_id@@";
+	d2rq:class vocab:versionhistory;
+	d2rq:classDefinitionLabel "versionhistory";
+	.
+map:versionhistory__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionhistory;
+	d2rq:property rdfs:label;
+	d2rq:pattern "versionhistory #@@versionhistory.versionhistory_id@@";
+	.
+map:versionhistory_versionhistory_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionhistory;
+	d2rq:property vocab:versionhistory_versionhistory_id;
+	d2rq:propertyDefinitionLabel "versionhistory versionhistory_id";
+	d2rq:column "versionhistory.versionhistory_id";
+	d2rq:datatype xsd:integer;
+	.
+
+# Table versionitem
+map:versionitem a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "versionitem/@@versionitem.versionitem_id@@";
+	d2rq:class vocab:versionitem;
+	d2rq:classDefinitionLabel "versionitem";
+	.
+map:versionitem__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property rdfs:label;
+	d2rq:pattern "versionitem #@@versionitem.versionitem_id@@";
+	.
+map:versionitem_versionitem_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property vocab:versionitem_versionitem_id;
+	d2rq:propertyDefinitionLabel "versionitem versionitem_id";
+	d2rq:column "versionitem.versionitem_id";
+	d2rq:datatype xsd:integer;
+	.
+map:versionitem_version_number a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property vocab:versionitem_version_number;
+	d2rq:propertyDefinitionLabel "versionitem version_number";
+	d2rq:column "versionitem.version_number";
+	d2rq:datatype xsd:integer;
+	.
+map:versionitem_version_date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property vocab:versionitem_version_date;
+	d2rq:propertyDefinitionLabel "versionitem version_date";
+	d2rq:column "versionitem.version_date";
+	d2rq:datatype xsd:dateTime;
+	.
+map:versionitem_version_summary a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property vocab:versionitem_version_summary;
+	d2rq:propertyDefinitionLabel "versionitem version_summary";
+	d2rq:column "versionitem.version_summary";
+	.
+map:versionitem_eperson_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property vocab:versionitem_eperson_id;
+	d2rq:refersToClassMap map:eperson;
+	d2rq:join "versionitem.eperson_id => eperson.eperson_id";
+	.
+map:versionitem_versionhistory_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property vocab:versionitem_versionhistory_id;
+	d2rq:refersToClassMap map:versionhistory;
+	d2rq:join "versionitem.versionhistory_id => versionhistory.versionhistory_id";
+	.
+map:versionitem_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:versionitem;
+	d2rq:property vocab:versionitem_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "versionitem.item_id => item.item_id";
+	.
+
+# Table webapp
+map:webapp a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "webapp/@@webapp.webapp_id@@";
+	d2rq:class vocab:webapp;
+	d2rq:classDefinitionLabel "webapp";
+	.
+map:webapp__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:webapp;
+	d2rq:property rdfs:label;
+	d2rq:pattern "webapp #@@webapp.webapp_id@@";
+	.
+map:webapp_webapp_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:webapp;
+	d2rq:property vocab:webapp_webapp_id;
+	d2rq:propertyDefinitionLabel "webapp webapp_id";
+	d2rq:column "webapp.webapp_id";
+	d2rq:datatype xsd:integer;
+	.
+map:webapp_appname a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:webapp;
+	d2rq:property vocab:webapp_appname;
+	d2rq:propertyDefinitionLabel "webapp appname";
+	d2rq:column "webapp.appname";
+	.
+map:webapp_url a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:webapp;
+	d2rq:property vocab:webapp_url;
+	d2rq:propertyDefinitionLabel "webapp url";
+	d2rq:column "webapp.url";
+	.
+map:webapp_started a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:webapp;
+	d2rq:property vocab:webapp_started;
+	d2rq:propertyDefinitionLabel "webapp started";
+	d2rq:column "webapp.started";
+	d2rq:datatype xsd:dateTime;
+	.
+map:webapp_isui a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:webapp;
+	d2rq:property vocab:webapp_isui;
+	d2rq:propertyDefinitionLabel "webapp isui";
+	d2rq:column "webapp.isui";
+	d2rq:datatype xsd:integer;
+	.
+
+# Table workflowitem
+map:workflowitem a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "workflowitem/@@workflowitem.workflow_id@@";
+	d2rq:class vocab:workflowitem;
+	d2rq:classDefinitionLabel "workflowitem";
+	.
+map:workflowitem__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property rdfs:label;
+	d2rq:pattern "workflowitem #@@workflowitem.workflow_id@@";
+	.
+map:workflowitem_workflow_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_workflow_id;
+	d2rq:propertyDefinitionLabel "workflowitem workflow_id";
+	d2rq:column "workflowitem.workflow_id";
+	d2rq:datatype xsd:integer;
+	.
+map:workflowitem_state a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_state;
+	d2rq:propertyDefinitionLabel "workflowitem state";
+	d2rq:column "workflowitem.state";
+	d2rq:datatype xsd:integer;
+	.
+map:workflowitem_multiple_titles a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_multiple_titles;
+	d2rq:propertyDefinitionLabel "workflowitem multiple_titles";
+	d2rq:column "workflowitem.multiple_titles";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:workflowitem_published_before a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_published_before;
+	d2rq:propertyDefinitionLabel "workflowitem published_before";
+	d2rq:column "workflowitem.published_before";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:workflowitem_multiple_files a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_multiple_files;
+	d2rq:propertyDefinitionLabel "workflowitem multiple_files";
+	d2rq:column "workflowitem.multiple_files";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:workflowitem_collection_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_collection_id;
+	d2rq:refersToClassMap map:collection;
+	d2rq:join "workflowitem.collection_id => collection.collection_id";
+	.
+map:workflowitem_owner__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_owner;
+	d2rq:refersToClassMap map:eperson;
+	d2rq:join "workflowitem.owner => eperson.eperson_id";
+	.
+map:workflowitem_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workflowitem;
+	d2rq:property vocab:workflowitem_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "workflowitem.item_id => item.item_id";
+	.
+
+# Table workspaceitem
+map:workspaceitem a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "workspaceitem/@@workspaceitem.workspace_item_id@@";
+	d2rq:class vocab:workspaceitem;
+	d2rq:classDefinitionLabel "workspaceitem";
+	.
+map:workspaceitem__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property rdfs:label;
+	d2rq:pattern "workspaceitem #@@workspaceitem.workspace_item_id@@";
+	.
+map:workspaceitem_workspace_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_workspace_item_id;
+	d2rq:propertyDefinitionLabel "workspaceitem workspace_item_id";
+	d2rq:column "workspaceitem.workspace_item_id";
+	d2rq:datatype xsd:integer;
+	.
+map:workspaceitem_multiple_titles a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_multiple_titles;
+	d2rq:propertyDefinitionLabel "workspaceitem multiple_titles";
+	d2rq:column "workspaceitem.multiple_titles";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:workspaceitem_published_before a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_published_before;
+	d2rq:propertyDefinitionLabel "workspaceitem published_before";
+	d2rq:column "workspaceitem.published_before";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:workspaceitem_multiple_files a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_multiple_files;
+	d2rq:propertyDefinitionLabel "workspaceitem multiple_files";
+	d2rq:column "workspaceitem.multiple_files";
+	d2rq:valueRegex "^[01]*$";
+	.
+map:workspaceitem_stage_reached a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_stage_reached;
+	d2rq:propertyDefinitionLabel "workspaceitem stage_reached";
+	d2rq:column "workspaceitem.stage_reached";
+	d2rq:datatype xsd:integer;
+	.
+map:workspaceitem_page_reached a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_page_reached;
+	d2rq:propertyDefinitionLabel "workspaceitem page_reached";
+	d2rq:column "workspaceitem.page_reached";
+	d2rq:datatype xsd:integer;
+	.
+map:workspaceitem_collection_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_collection_id;
+	d2rq:refersToClassMap map:collection;
+	d2rq:join "workspaceitem.collection_id => collection.collection_id";
+	.
+map:workspaceitem_item_id__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:workspaceitem;
+	d2rq:property vocab:workspaceitem_item_id;
+	d2rq:refersToClassMap map:item;
+	d2rq:join "workspaceitem.item_id => item.item_id";
+	.
+
+# Table community2item
+map:community2item a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	# Sorry, I don't know which columns to put into the uriPattern
+	#     for "community2item" because the table doesn't have a primary key.
+	#     Please specify it manually.
+	d2rq:uriPattern "community2item";
+	d2rq:class vocab:community2item;
+	d2rq:classDefinitionLabel "community2item";
+	.
+map:community2item_community_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2item;
+	d2rq:property vocab:community2item_community_id;
+	d2rq:propertyDefinitionLabel "community2item community_id";
+	d2rq:column "community2item.community_id";
+	d2rq:datatype xsd:integer;
+	.
+map:community2item_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:community2item;
+	d2rq:property vocab:community2item_item_id;
+	d2rq:propertyDefinitionLabel "community2item item_id";
+	d2rq:column "community2item.item_id";
+	d2rq:datatype xsd:integer;
+	.
+
+# Table dcvalue
+map:dcvalue a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	# Sorry, I don't know which columns to put into the uriPattern
+	#     for "dcvalue" because the table doesn't have a primary key.
+	#     Please specify it manually.
+	d2rq:uriPattern "dcvalue";
+	d2rq:class vocab:dcvalue;
+	d2rq:classDefinitionLabel "dcvalue";
+	.
+map:dcvalue_dc_value_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dcvalue;
+	d2rq:property vocab:dcvalue_dc_value_id;
+	d2rq:propertyDefinitionLabel "dcvalue dc_value_id";
+	d2rq:column "dcvalue.dc_value_id";
+	d2rq:datatype xsd:integer;
+	.
+map:dcvalue_item_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dcvalue;
+	d2rq:property vocab:dcvalue_item_id;
+	d2rq:propertyDefinitionLabel "dcvalue item_id";
+	d2rq:column "dcvalue.item_id";
+	d2rq:datatype xsd:integer;
+	.
+map:dcvalue_dc_type_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dcvalue;
+	d2rq:property vocab:dcvalue_dc_type_id;
+	d2rq:propertyDefinitionLabel "dcvalue dc_type_id";
+	d2rq:column "dcvalue.dc_type_id";
+	d2rq:datatype xsd:integer;
+	.
+map:dcvalue_text_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dcvalue;
+	d2rq:property vocab:dcvalue_text_value;
+	d2rq:propertyDefinitionLabel "dcvalue text_value";
+	d2rq:column "dcvalue.text_value";
+	.
+map:dcvalue_text_lang a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dcvalue;
+	d2rq:property vocab:dcvalue_text_lang;
+	d2rq:propertyDefinitionLabel "dcvalue text_lang";
+	d2rq:column "dcvalue.text_lang";
+	.
+map:dcvalue_place a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dcvalue;
+	d2rq:property vocab:dcvalue_place;
+	d2rq:propertyDefinitionLabel "dcvalue place";
+	d2rq:column "dcvalue.place";
+	d2rq:datatype xsd:integer;
+	.
+
+# Table vista_autores_agregar
+map:vista_autores_agregar a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	# Sorry, I don't know which columns to put into the uriPattern
+	#     for "vista_autores_agregar" because the table doesn't have a primary key.
+	#     Please specify it manually.
+	d2rq:uriPattern "vista_autores_agregar";
+	d2rq:class vocab:vista_autores_agregar;
+	d2rq:classDefinitionLabel "vista_autores_agregar";
+	.
+map:vista_autores_agregar_text_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:vista_autores_agregar;
+	d2rq:property vocab:vista_autores_agregar_text_value;
+	d2rq:propertyDefinitionLabel "vista_autores_agregar text_value";
+	d2rq:column "vista_autores_agregar.text_value";
+	.
+
+# Table vista_autores_eliminar
+map:vista_autores_eliminar a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	# Sorry, I don't know which columns to put into the uriPattern
+	#     for "vista_autores_eliminar" because the table doesn't have a primary key.
+	#     Please specify it manually.
+	d2rq:uriPattern "vista_autores_eliminar";
+	d2rq:class vocab:vista_autores_eliminar;
+	d2rq:classDefinitionLabel "vista_autores_eliminar";
+	.
+map:vista_autores_eliminar_value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:vista_autores_eliminar;
+	d2rq:property vocab:vista_autores_eliminar_value;
+	d2rq:propertyDefinitionLabel "vista_autores_eliminar value";
+	d2rq:column "vista_autores_eliminar.value";
+	.
 
