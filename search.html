@@ -68,19 +68,19 @@
 
       function doSubjectQuery() { 
         var value = $("#subject").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) } LIMIT 100';
+        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) } LIMIT 10';
         doQuery(q,'#subject-table');
       }
 
       function doPredicateQuery() { 
         var value = $("#predicate").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Predicate), "'+ value +'", "i" ) } LIMIT 100';
+        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Predicate), "'+ value +'", "i" ) } LIMIT 10';
         doQuery(q,'#predicate-table');
       }
 
       function doObjectQuery() { 
         var value = $("#object").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(?Object, "'+ value +'", "i" ) } LIMIT 100';
+        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(?Object, "'+ value +'", "i" ) } LIMIT 10';
         doQuery(q,'#object-table');
       }
 
@@ -92,7 +92,7 @@
           dbpediares: 'PREFIX dbpedia-res: <http://dbpedia.org/resource/>',
         };
 
-        var prefix = prefixs.cd + prefixs.rdf;
+        var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares;
         //var url = 'http://localhost:8080/openrdf-sesame/repositories/test';
         var url = 'http://dbpedia.org/sparql';
 
