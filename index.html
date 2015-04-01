@@ -23,6 +23,7 @@
         <ul class="nav nav-pills pull-right">
           <li role="presentation" class="active"><a href="index.html">Basics</a></li>
           <li role="presentation"><a href="rdf.html">RDF Database</a></li>
+		  <li role="presentation"><a href="search.html">Buscador</a></li>
           <li role="presentation"><a href="contact.html">Contact</a></li>
         </ul>
         </nav>
@@ -108,7 +109,7 @@ SELECT DISTINCT ?nombre ?pais WHERE {
         </pre>
         <h4>Resultado:</h4>
         <div id="query4"></div>
-        <p> Usa un repo de testeo (ID:123) en sesame <a href="http://localhost:8080/openrdf-sesame/repositories/123"> http://localhost:8080/openrdf-sesame/repositories/123 </a> (endpoint). Más detalles del repo: <a href="http://localhost:8080/openrdf-workbench/repositories/123/summary"> http://localhost:8080/openrdf-workbench/repositories/123/summary </a>. Requiere tomcat corriendo. TODO: verificar que se use correctamente esta llamada. Se usó el siguiente prefijo:</p>
+        <p> Usa un repo de testeo (ID:123) en sesame <a href="http://localhost:8080/openrdf-sesame/repositories/test"> http://localhost:8080/openrdf-sesame/repositories/test </a> (endpoint). Más detalles del repo: <a href="http://localhost:8080/openrdf-workbench/repositories/123/summary"> http://localhost:8080/openrdf-workbench/repositories/123/summary </a>. Requiere tomcat corriendo. TODO: verificar que se use correctamente esta llamada. Se usó el siguiente prefijo:</p>
         <pre>
 PREFIX cd: &lt;http://www.recshop.fake/cd#&rt;
         </pre>
@@ -200,7 +201,7 @@ PREFIX cd: &lt;http://www.recshop.fake/cd#&rt;
       $( function() {
         var bcn_url = 'http://datos.bcn.cl/sparql';
         var dbpedia_url = 'http://dbpedia.org/sparql';
-        var local_url = 'http://localhost:8080/openrdf-sesame/repositories/123'
+        var local_url = 'http://localhost:8080/openrdf-sesame/repositories/test'
         var q1 = 'SELECT DISTINCT ?id ?name ?place WHERE { ?place dc:identifier ?id . ?place gn:officialName ?name . ?place a bcngeo:Commune . } LIMIT 10';
         var q2 = 'SELECT ?X WHERE { ?X dbpedia-owl:almaMater dbpedia-res:University_of_Chile . ?X dbpedia-owl:birthDate ?D FILTER (?D > "1985-01-01"^^xsd:date ) }';
         var q3 = 'SELECT ?persona ?name WHERE { ?persona foaf:name ?name . ?persona a foaf:Person . ?persona bcnbio:hasParliamentaryAppointment ?parlapoint . ?parlapoint bcnbio:hasPosition ?position . ?position rdf:type bcnbio:Diputado . ?parlapoint bcnbio:hasBeginning ?ini . ?ini time:year ?yini . ?parlapoint bcnbio:hasEnd ?fin . ?fin time:year ?yfin FILTER ( ?yini < "2015"^^xsd:integer ) FILTER ( ?yfin > "2015"^^xsd:integer )} LIMIT 10';
