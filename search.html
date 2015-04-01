@@ -69,19 +69,19 @@
       function doSubjectQuery() { 
         var value = $("#subject").val();
         var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) } LIMIT 10';
-        doQuery(q,'#subject-table');
+        var t = setTimeout(doQuery(q,'#subject-table'), 10000);
       }
 
       function doPredicateQuery() { 
         var value = $("#predicate").val();
         var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Predicate), "'+ value +'", "i" ) } LIMIT 10';
-        doQuery(q,'#predicate-table');
+        setTimeout(doQuery(q,'#predicate-table'), 10000);
       }
 
       function doObjectQuery() { 
         var value = $("#object").val();
         var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(?Object, "'+ value +'", "i" ) } LIMIT 10';
-        doQuery(q,'#object-table');
+        setTimeout(doQuery(q,'#object-table'), 10000);
       }
 
       function doQuery(q,resContainerId) {
