@@ -34,29 +34,49 @@
 
         <p>Busca en <a href="http://dbpedia.org/sparql"> DBPedia </a>!</p>
 
+        <button class="btn btn-default" onclick="clearAllTables()">
+          Clear Tables
+        </button>
+        <button class="btn btn-default">
+          Useless button
+        </button>
+        <br><br>
+
         <form class="form-inline" action="javascript:doSubjectQuery()">
-          <div class="form-group">
-            <input type="text" class="form-control" id="subject" placeholder="Buscar por sujeto...">
-          </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" id="subjectBtn" aria-hidden="true"></span></button>
+          <fieldset id="subject-disable">
+            <div class="form-group">
+              <input type="text" class="form-control" id="subject" placeholder="Buscar por sujeto...">
+            </div>
+            <button type="submit" class="btn btn-default">
+              <span class="glyphicon glyphicon-search" id="subjectBtn" aria-hidden="true"></span>
+            </button>
+          </fieldset>
         </form>
 
         <div id="subject-table"></div>
 
         <form class="form-inline" action="javascript:doPredicateQuery()">
-          <div class="form-group">
-            <input type="text" class="form-control" id="predicate" placeholder="Buscar por predicado...">
-          </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" id="predicateBtn" aria-hidden="true"></span></button>
+          <fieldset id="predicate-disable">
+            <div class="form-group">
+              <input type="text" class="form-control" id="predicate" placeholder="Buscar por predicado...">
+            </div>
+            <button type="submit" class="btn btn-default">
+              <span class="glyphicon glyphicon-search" id="predicateBtn" aria-hidden="true"></span>
+            </button>
+          </fieldset>
         </form>
 
         <div id="predicate-table"></div>
 
         <form class="form-inline" action="javascript:doObjectQuery()">
-          <div class="form-group">
-            <input type="text" class="form-control" id="object" placeholder="Buscar por objeto...">
-          </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" id="objectBtn" aria-hidden="true"></span></button>
+          <fieldset id="object-disable">
+            <div class="form-group">
+              <input type="text" class="form-control" id="object" placeholder="Buscar por objeto...">
+            </div>
+            <button type="submit" class="btn btn-default">
+              <span class="glyphicon glyphicon-search" id="objectBtn" aria-hidden="true"></span>
+            </button>
+          </fieldset>
         </form>
 
         <div id="object-table"></div>
@@ -64,82 +84,7 @@
       </div>
     </div>
 
-    <script type="text/javascript">
-
-      var allTablesID = ['#subject-table','#predicate-table','#object-table'];
-
-      function doSubjectQuery() { 
-        var value = $("#subject").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) } LIMIT 10';
-        setTimeout(doQuery(q,'#subject'), 10000)
-      }
-
-      function doPredicateQuery() { 
-        var value = $("#predicate").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Predicate), "'+ value +'", "i" ) } LIMIT 10';
-        setTimeout(doQuery(q,'#predicate'), 10000);
-      }
-
-      function doObjectQuery() { 
-        var value = $("#object").val();
-        var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(?Object, "'+ value +'", "i" ) } LIMIT 10';
-        setTimeout(doQuery(q,'#object'), 10000);
-      }
-
-      function doQuery(q,resContainerId) {
-        var prefixs = {
-          cd: 'PREFIX cd: <http://www.recshop.fake/cd#>',
-          rdf: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>',
-          dbpediaowl: 'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>',
-          dbpediares: 'PREFIX dbpedia-res: <http://dbpedia.org/resource/>',
-        };
-
-        var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares;
-        //var url = 'http://localhost:8080/openrdf-sesame/repositories/test';
-        var url = 'http://dbpedia.org/sparql';
-
-        for ( key in allTablesID ) {
-          $( allTablesID[key] ).empty();
-        }
-        $( resContainerId + '-table' ).empty()
-        $( resContainerId + 'Btn' ).removeClass( 'glyphicon-search' ).addClass( 'glyphicon-refresh glyphicon-refresh-animate' );
-
-        $.ajax({ 
-          dataType: 'jsonp',
-          data: {
-            //queryLn: 'SPARQL',
-            query: prefix  + q,
-            format: 'application/sparql-results+json',
-            //infer: 'true',
-            //Accept: 'application/sparql-results+json' // Si pongo format en vez de Accept se enoja
-          },
-          url: url,
-          success: function( data ) {
-            var table = '<table class="table table-condensed table-bordered"><thead><tr>';
-            var props = [];
-            $( data.head.vars ).each( function( k, v ) {
-              props.push( v );
-              table += '<th>' + v + '</th>';
-            });
-            table += '</tr></thead><tbody>';
-            $( data.results.bindings ).each( function( k, v ) {
-              table += '<tr>';
-              $( props ).each( function ( i, it ) { 
-                table += '<td><a href="' + v[it].value + '">' + v[it].value + '</a></td>'; 
-              } );
-              table += '</tr>';  
-            });
-            if( data.results.bindings.length == 0 ) { console.log('missing?'); table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';}
-            $( resContainerId + '-table' ).empty().append( table );
-            $( resContainerId + 'Btn' ).removeClass( 'glyphicon-refresh glyphicon-refresh-animate' ).addClass( 'glyphicon-search' );
-          },
-          complete: function() {
-            console.log( 'Query Complete!' );
-          }
-        });
-}
-
-</script>
+<script src="./js/querys.js"></script>    
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>
