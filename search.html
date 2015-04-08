@@ -38,7 +38,7 @@
           <div class="form-group">
             <input type="text" class="form-control" id="subject" placeholder="Buscar por sujeto...">
           </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" id="subjectBtn" aria-hidden="true"></span></button>
         </form>
 
         <div id="subject-table"></div>
@@ -47,7 +47,7 @@
           <div class="form-group">
             <input type="text" class="form-control" id="predicate" placeholder="Buscar por predicado...">
           </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" id="predicateBtn" aria-hidden="true"></span></button>
         </form>
 
         <div id="predicate-table"></div>
@@ -56,7 +56,7 @@
           <div class="form-group">
             <input type="text" class="form-control" id="object" placeholder="Buscar por objeto...">
           </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" id="objectBtn" aria-hidden="true"></span></button>
         </form>
 
         <div id="object-table"></div>
@@ -66,22 +66,24 @@
 
     <script type="text/javascript">
 
+      var allTablesID = ['#subject-table','#predicate-table','#object-table'];
+
       function doSubjectQuery() { 
         var value = $("#subject").val();
         var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) } LIMIT 10';
-        var t = setTimeout(doQuery(q,'#subject-table'), 10000);
+        setTimeout(doQuery(q,'#subject'), 10000)
       }
 
       function doPredicateQuery() { 
         var value = $("#predicate").val();
         var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Predicate), "'+ value +'", "i" ) } LIMIT 10';
-        setTimeout(doQuery(q,'#predicate-table'), 10000);
+        setTimeout(doQuery(q,'#predicate'), 10000);
       }
 
       function doObjectQuery() { 
         var value = $("#object").val();
         var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(?Object, "'+ value +'", "i" ) } LIMIT 10';
-        setTimeout(doQuery(q,'#object-table'), 10000);
+        setTimeout(doQuery(q,'#object'), 10000);
       }
 
       function doQuery(q,resContainerId) {
@@ -95,6 +97,12 @@
         var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares;
         //var url = 'http://localhost:8080/openrdf-sesame/repositories/test';
         var url = 'http://dbpedia.org/sparql';
+
+        for ( key in allTablesID ) {
+          $( allTablesID[key] ).empty();
+        }
+        $( resContainerId + '-table' ).empty()
+        $( resContainerId + 'Btn' ).removeClass( 'glyphicon-search' ).addClass( 'glyphicon-refresh glyphicon-refresh-animate' );
 
         $.ajax({ 
           dataType: 'jsonp',
@@ -122,7 +130,8 @@
               table += '</tr>';  
             });
             if( data.results.bindings.length == 0 ) { console.log('missing?'); table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';}
-            $( resContainerId ).empty().append( table );
+            $( resContainerId + '-table' ).empty().append( table );
+            $( resContainerId + 'Btn' ).removeClass( 'glyphicon-refresh glyphicon-refresh-animate' ).addClass( 'glyphicon-search' );
           },
           complete: function() {
             console.log( 'Query Complete!' );
