@@ -36,8 +36,8 @@ function doQuery(q,resContainerId) {
   };
 
   var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares;
-  //var url = 'http://localhost:8080/openrdf-sesame/repositories/test';
-  var url = 'http://dbpedia.org/sparql';
+  var url = 'http://localhost:8080/openrdf-sesame/repositories/autoridades';
+  //var url = 'http://dbpedia.org/sparql';
 
   $( resContainerId + '-table' ).empty();
   $( resContainerId + 'Btn' ).removeClass( 'glyphicon-search' ).addClass( 'glyphicon-refresh glyphicon-refresh-animate' );
@@ -48,9 +48,9 @@ function doQuery(q,resContainerId) {
     data: {
       //queryLn: 'SPARQL',
       query: prefix  + q,
-      format: 'application/sparql-results+json',
+      //format: 'application/sparql-results+json',
       //infer: 'true',
-      //Accept: 'application/sparql-results+json' // Si pongo format en vez de Accept se enoja
+      Accept: 'application/sparql-results+json' // Si pongo format en vez de Accept se enoja
     },
     url: url,
     success: function( data ) {
