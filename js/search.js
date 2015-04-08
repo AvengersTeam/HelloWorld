@@ -5,6 +5,10 @@ function clearAllTables() {
   }
 }
 
+function clearTable(ID) {
+  $( ID ).empty();
+}
+
 function doSubjectQuery() { 
   var value = $('#subject').val();
   var q = 'SELECT DISTINCT ?Subject ?Predicate ?Object WHERE { ?Subject ?Predicate ?Object . FILTER regex(str(?Subject), "'+ value +'", "i" ) } LIMIT 10';
@@ -60,12 +64,17 @@ function doQuery(q,resContainerId) {
       $( data.results.bindings ).each( function( k, v ) {
         table += '<tr>';
         $( props ).each( function ( i, it ) { 
-          table += '<td><a href="' + v[it].value + '">' + v[it].value + '</a></td>'; 
+          table += '<td><a href="' + v[it].value + '" target="_blank">' + v[it].value + '</a></td>'; 
         } );
         table += '</tr>';  
       });
       if( data.results.bindings.length == 0 ) { console.log('missing?'); table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';}
-      $( resContainerId + '-table' ).empty().append( table );
+
+      var closeBtn = $('<button>').addClass('btn btn-default btn-close').attr('onclick','clearTable("'+ resContainerId +'-table")');
+      var span = $('<span>').addClass('glyphicon glyphicon-remove');
+      closeBtn.append(span)
+      $( resContainerId + '-table' ).empty().append(closeBtn);
+      $( resContainerId + '-table' ).append( table );
       $( resContainerId + 'Btn' ).removeClass( 'glyphicon-refresh glyphicon-refresh-animate' ).addClass( 'glyphicon-search' );
       $( resContainerId + '-disable' ).removeAttr( 'disabled' );
     }
