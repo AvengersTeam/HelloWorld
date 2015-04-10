@@ -1,7 +1,9 @@
 function clearAllTables() {
-  var allTablesID = ['#subject-table','#predicate-table','#object-table'];
+  var allTablesID = ['#subject-table', '#predicate-table', '#object-table'];
+  var allInputsID = ['#subject', '#predicate', '#object'];
   for ( key in allTablesID ) {
     $( allTablesID[key] ).empty();
+    $( allInputsID[key] ).val('')
   }
 }
 

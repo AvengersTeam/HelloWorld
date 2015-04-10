@@ -23,7 +23,7 @@
         <ul class="nav nav-pills pull-right">
           <li role="presentation"><a href="index.html">Basics</a></li>
           <li role="presentation" class="active"><a href="rdf.html">RDF Database</a></li>
-		  <li role="presentation"><a href="search.html">Buscador</a></li>
+		      <li role="presentation"><a href="search.html">Buscador</a></li>
           <li role="presentation"><a href="contact.html">Contact</a></li>
         </ul>
         </nav>
@@ -31,6 +31,19 @@
       </div>
       <div class="body">
         <h1 class="page-header">Tutorial de Base de Datos RDF</h1>
+        <p>Para instalar la base de datos del sitio, se debe instalar el servidor tomcat</p>
+        <ul>
+          <li>Descargar Tomcat8.0: <a href="https://tomcat.apache.org/download-80.cgi" target="_blank">link</a>. 
+          <li>Tutorial de instalación: <a href="https://tomcat.apache.org/tomcat-8.0-doc/setup.html" target="_blank">link</a>.
+        </ul>
+        <p>Para el framework sesame</p>
+        <ul>
+          <li>Descargar Sesame: <a href="http://sourceforge.net/projects/sesame/files/Sesame%202/" target="_blank">link</a>. 
+          <li>Para instalarlo, copiar openrdf-sesame.war y openrdf-workbench.war en TOMCAT_HOME\webapps
+        </ul>
+
+        <p>Listo! Luego de iniciar tomcat, acceder a <a href="http://localhost:8080/openrdf-workbench/repositories" target="_blank"> http://localhost:8080/openrdf-workbench/repositories</a> para crear y editar repositorios</p>.
+
       </div>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
