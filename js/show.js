@@ -1,17 +1,15 @@
 
 
 // show() consulta por el objeto según 'nombre' y despliega sus datos asociados
-function show() {
+$(document).ready(function show() {
 	var nombre = 'http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest#' + getQueryVariable('nombre');
 	
-	var query = 'SELECT ?p ?o WHERE{ ?url ?p ?o FILTER( str(?url) = "' + nombre + '" ) }';
-	doQuery(query, "container_id");
+	var query = 'SELECT ?Property ?Value WHERE{ ?url ?Property ?Value FILTER( str(?url) = "' + nombre + '" ) }';
+	doQuery(query, "#predicate");
 	console.log(query);
-	
 	console.log("relacionados!");
-	related_query = 'SELECT ?s ?p ?o (FILTER )';
-	doQuery();
-}
+
+});
 
 // getQueryVariable obtiene el valor enviado por get asociado a la 'variable'
 function getQueryVariable(variable) {
@@ -51,23 +49,32 @@ var prefixs = {
 		  var props = [];
 		  $( data.head.vars ).each( function( k, v ) {
 			props.push( v );
-			//table += '<th>' + v + '</th>';
+			table += '<th>' + v + '</th>';
 			console.log( v);
 		  });
-		  //table += '</tr></thead><tbody>';
+		  table += '</tr></thead><tbody>';
 		  $( data.results.bindings ).each( function( k, v ) {
-			//table += '<tr>';
+			table += '<tr>';
 			$( props ).each( function ( i, it ) { 
-			  //table += '<td><a href="' + v[it].value + '" target="_blank">' + v[it].value + '</a></td>'; 
+			  if (v[it].value.substr(0,7)=='http://') table += '<td><a href="' + fixUrl(v[it].value) + '" target="_blank">' + v[it].value + '</a></td>';
+			  else table += '<td>' + v[it].value + '</td>';
 			  console.log( v[it].value);
 			} );
-			//table += '</tr>';  
+			table += '</tr>';  
 		  });
 		  if( data.results.bindings.length == 0 ) { console.log('missing?'); table += '<tr><td colspan="'+props.length+'" class="text-center">Sin Resultados</td></tr>';}
 
-		  
+		  $( resContainerId + '-table' ).append( table );
+		  console.log(table);
 		}
     });
+	
+	function fixUrl(original_url) {
+		var location = "file:///C:/Users/SISIB/HelloWorld/show.html?nombre=";
+		if (original_url.split("#")[0] != "http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest") return original_url
+		var original_val = original_url.split("#")[1];
+		return location + original_val;
+	}
 }
 
 /*
