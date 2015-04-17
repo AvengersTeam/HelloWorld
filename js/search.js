@@ -69,7 +69,7 @@ function doQuery(q,resContainerId) {
     url: url,
     success: function( data ) {
       console.log(data)
-      var table = '<table class="table table-condensed table-bordered"><thead><tr>';
+      var table = '<table class="table table-condensed table-bordered" id="inner-' + resContainerId.substr(1) + '-table"><thead><tr>';
       var props = [];
       $( data.head.vars ).each( function( k, v ) {
         props.push( v );
@@ -90,9 +90,14 @@ function doQuery(q,resContainerId) {
       var span = $('<span>').addClass('glyphicon glyphicon-remove');
       closeBtn.append(span)
       $( resContainerId + '-table' ).empty().append(closeBtn);
+      
       $( resContainerId + '-table' ).append( table );
       $( resContainerId + 'Btn' ).removeClass( 'glyphicon-refresh glyphicon-refresh-animate' ).addClass( 'glyphicon-search' );
       $( resContainerId + '-disable' ).removeAttr( 'disabled' );
+
+      tableWidth = $( '#inner-' + resContainerId.substr(1) + '-table' ).css('width');
+      btnPos =  parseInt(tableWidth) - 15
+      closeBtn.css('margin-left',btnPos + 'px')
     }
   });
 }
