@@ -79,7 +79,7 @@ function doQuery(q,resContainerId) {
       $( data.results.bindings ).each( function( k, v ) {
         table += '<tr>';
         $( props ).each( function ( i, it ) { 
-          if (v[it].value.substr(0,7)=='http://') table += '<td><a href="' + v[it].value + '" target="_blank">' + v[it].value + '</a></td>';
+          if (v[it].value.substr(0,7)=='http://') table += '<td><a href="' + fixUrl(v[it].value) + '" target="_blank">' + v[it].value + '</a></td>';
           else table += '<td>' + v[it].value + '</td>';
         } );
         table += '</tr>';  
@@ -101,3 +101,11 @@ function doQuery(q,resContainerId) {
     }
   });
 }
+
+  function fixUrl(original_url) {
+    console.log(original_url)
+    var location = "file:///C:/Users/SISIB/git/HelloWorld/show.html?nombre=";
+    if (original_url.split("#")[0] != "http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest") return original_url
+    var original_val = original_url.split("#")[1];
+    return location + original_val;
+  }

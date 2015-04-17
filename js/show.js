@@ -3,7 +3,7 @@
 // show() consulta por el objeto según 'nombre' y despliega sus datos asociados
 $(document).ready(function show() {
 	var nombre = 'http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest#' + getQueryVariable('nombre');
-	
+	$( '#resource' ).text( getQueryVariable('nombre') );
 	var query = 'SELECT ?Property ?Value WHERE{ ?url ?Property ?Value FILTER( str(?url) = "' + nombre + '" ) }';
 	doQuery(query, "#predicate");
 	console.log(query);
