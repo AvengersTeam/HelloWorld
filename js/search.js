@@ -1,3 +1,5 @@
+$('#sparql').val('SELECT ?Nombre ?D WHERE { ?NombreUri foaf:firstName ?Nombre . ?NombreUri bio:event ?b . ?b bio:birth ?D FILTER (?D = "1952"^^xsd:string ) }')
+
 function clearAllTables() {
   var allTablesID = ['#subject-table', '#predicate-table', '#object-table'];
   var allInputsID = ['#subject', '#predicate', '#object'];
