@@ -29,15 +29,24 @@ function doObjectQuery() {
   doQuery(q,'#object')
 }
 
+function doSparql() { 
+  var value = $('#sparql').val();
+  var q = value;
+  doQuery(q,'#sparql')
+}
+
 function doQuery(q,resContainerId) {
   var prefixs = {
     cd: 'PREFIX cd: <http://www.recshop.fake/cd#>',
     rdf: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>',
     dbpediaowl: 'PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>',
     dbpediares: 'PREFIX dbpedia-res: <http://dbpedia.org/resource/>',
+    foaf: 'PREFIX foaf: <http://xmlns.com/foaf/0.1/>',
+    ubitest: 'PREFIX ubitest: <http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest#>',
+    bio: 'PREFIX bio: <http://vocab.org/bio/0.1/>'
   };
 
-  var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares;
+  var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares + prefixs.foaf + prefixs.ubitest + prefixs.bio;
   var url = 'http://localhost:8080/openrdf-sesame/repositories/autoridades';
   //var url = 'http://dbpedia.org/sparql';
 
@@ -56,6 +65,7 @@ function doQuery(q,resContainerId) {
     },
     url: url,
     success: function( data ) {
+      console.log(data)
       var table = '<table class="table table-condensed table-bordered"><thead><tr>';
       var props = [];
       $( data.head.vars ).each( function( k, v ) {
