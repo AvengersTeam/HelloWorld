@@ -1,4 +1,4 @@
-$('#sparql').val('SELECT ?Nombre ?FechaNacimiento\nWHERE {\n    ?NombreUri foaf:firstName ?Nombre .\n    ?NombreUri bio:event ?b .\n    ?b bio:birth ?FechaNacimiento\n    FILTER (?FechaNacimiento = "1952"^^xsd:string )\n}')
+$('#sparql').val('SELECT ?Nombre ?FechaNacimiento\nWHERE {\n    ?NombreUri foaf:firstName ?Nombre .\n    ?NombreUri bio:event ?b .\n    ?b bio:birth ?FechaNacimiento\n    FILTER (?FechaNacimiento = "1987"^^xsd:string )\n}')
 //SELECT ?a ?b ?c WHERE { ?a ?b ?c FILTER (str(?a) = "http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest#Ahmad_'Abd_al-Majid" ) }
 
 function clearAllTables() {
@@ -50,7 +50,8 @@ function doQuery(q,resContainerId) {
   };
 
   var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares + prefixs.foaf + prefixs.ubitest + prefixs.bio;
-  var url = 'http://localhost:8080/openrdf-sesame/repositories/autoridades';
+  var ip = document.getElementById("Internet").checked == true ? '172.16.172.169' : 'localhost';
+  var url = 'http://' + ip + ':8080/openrdf-sesame/repositories/autoridades';
   //var url = 'http://dbpedia.org/sparql';
 
   $( resContainerId + '-table' ).empty();
