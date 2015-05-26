@@ -46,7 +46,8 @@ function doQuery(q,resContainerId) {
     dbpediares: 'PREFIX dbpedia-res: <http://dbpedia.org/resource/>',
     foaf: 'PREFIX foaf: <http://xmlns.com/foaf/0.1/>',
     ubitest: 'PREFIX ubitest: <http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest#>',
-    bio: 'PREFIX bio: <http://vocab.org/bio/0.1/>'
+    bio: 'PREFIX bio: <http://vocab.org/bio/0.1/>',
+    frbr: 'PREFIX frbr: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>'
   };
 
   var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares + prefixs.foaf + prefixs.ubitest + prefixs.bio;
