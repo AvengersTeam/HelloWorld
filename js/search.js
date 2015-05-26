@@ -47,10 +47,12 @@ function doQuery(q,resContainerId) {
     foaf: 'PREFIX foaf: <http://xmlns.com/foaf/0.1/>',
     ubitest: 'PREFIX ubitest: <http://www.semanticweb.org/sisib/ontologies/2015/3/ubibtest#>',
     bio: 'PREFIX bio: <http://vocab.org/bio/0.1/>',
-    frbr: 'PREFIX frbr: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>'
+    frbrer: 'PREFIX frbrer: <http://iflastandards.info/ns/fr/frbr/frbrer#>',
+    dc: 'PREFIX dc: <http://purl.org/dc/elements/1.1/>',
+    dct: 'PREFIX dct: <http://purl.org/dc/terms/>'
   };
 
-  var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares + prefixs.foaf + prefixs.ubitest + prefixs.bio;
+  var prefix = prefixs.cd + prefixs.rdf + prefixs.dbpediaowl + prefixs.dbpediares + prefixs.foaf + prefixs.ubitest + prefixs.bio + prefixs.frbrer + prefixs.dc + prefixs.dct;
   var ip = document.getElementById("Internet").checked == true ? '172.16.172.169' : 'localhost';
   var url = 'http://' + ip + ':8080/openrdf-sesame/repositories/autoridades';
   //var url = 'http://dbpedia.org/sparql';
